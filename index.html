@@ -42,24 +42,23 @@ body {
   font-size: 11px; font-weight: 700; min-width: 22px; text-align: center; line-height: 18px;
 }
 .topbar .stat { font-size: 11px; color: var(--text2); font-weight: 500; }
-.main { flex: 1; overflow: hidden; position: relative; padding-bottom: var(--bottom-h); }
+.main { flex: 1; overflow: hidden; position: relative; }
 .bottom-nav {
   height: var(--bottom-h); background: var(--surface); border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-around; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-around; z-index: 100;
   overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
-  position: fixed; bottom: 0; left: 0; right: 0;
+  flex-shrink: 0;
   padding-bottom: env(safe-area-inset-bottom, 0);
-  touch-action: manipulation; pointer-events: auto;
 }
 .bottom-nav button {
   flex: 0 0 auto; min-width: 0; height: 100%; border: none; background: none; color: var(--text2);
   font-size: 11px; font-weight: 500; cursor: pointer; display: flex;
   flex-direction: column; align-items: center; justify-content: center; gap: 2px;
-  padding: 0 2px; touch-action: manipulation; pointer-events: auto;
+  padding: 0 2px;
 }
 .bottom-nav button .ico { font-size: 20px; }
 .bottom-nav button.active { color: var(--primary); font-weight: 700; }
-.view { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: var(--bottom-h); overflow-y: auto; overflow-x: hidden; z-index: 1; pointer-events: auto; }
+.view { display: none; position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; z-index: 1; }
 .view.active { display: flex; animation: fadeIn 0.2s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
