@@ -201,6 +201,31 @@ body {
   .quiz-card .q-text { font-size: 15px; }
   .quiz-result .score { font-size: 48px; }
 }
+
+/* Sync & Login */
+.sync-status { font-size: 11px; color: var(--text2); cursor: pointer; padding: 4px 10px;
+  border-radius: 16px; border: 1px solid var(--border); background: var(--bg);
+  display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+.sync-status .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text2); flex-shrink: 0; }
+.sync-status .dot.online { background: var(--success); }
+.sync-status .dot.syncing { background: var(--warn); animation: pulse 1s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 500;
+  display: flex; align-items: center; justify-content: center; }
+.modal-box { background: var(--surface); border-radius: var(--radius); padding: 28px;
+  max-width: 420px; width: 90vw; box-shadow: var(--shadow-lg); }
+.modal-box h3 { font-size: 17px; font-weight: 700; margin-bottom: 16px; }
+.modal-box label { font-size: 13px; font-weight: 600; display: block; margin: 10px 0 4px; color: var(--text2); }
+.modal-box input { width: 100%; padding: 10px 12px; border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 14px; background: var(--bg); color: var(--text); }
+.modal-box .modal-actions { display: flex; gap: 10px; margin-top: 18px; justify-content: flex-end; }
+.modal-box .modal-actions button { padding: 8px 20px; border-radius: 20px; font-size: 14px; cursor: pointer; border: 1px solid var(--border); background: var(--bg); color: var(--text); }
+.modal-box .modal-actions .btn-primary { background: var(--gradient); color: #fff; border: none; font-weight: 600; }
+.modal-box .hint { font-size: 11px; color: var(--text2); margin-top: 6px; line-height: 1.5; }
+.modal-box .hint a { color: var(--primary); }
+.modal-box .error { font-size: 12px; color: var(--danger); margin-top: 6px; display: none; }
+
 </style>
 </head>
 <body data-theme="light">
@@ -209,6 +234,7 @@ body {
   <span class="logo">习概复习</span>
   <select id="user-select"></select>
   <span class="spacer"></span>
+  <span class="sync-status" id="sync-status" onclick="showSyncModal()" title="点击登录以跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">未登录</span></span>
   <span class="stat" id="stat-time">⏱ 0分钟</span>
   <span class="badge" id="wrong-badge" style="display:none">0</span>
   <button id="btn-dark" title="暗色模式">🌙</button>
@@ -287,7 +313,7 @@ var quizReviewPos = 0;
 // ====== STORAGE HELPERS ======
 function userKey(k) { return currentUser + '_' + k; }
 function loadJSON(k) { try { return JSON.parse(localStorage.getItem(userKey(k))) || {}; } catch(e) { return {}; } }
-function saveJSON(k, v) { localStorage.setItem(userKey(k), JSON.stringify(v)); }
+function saveJSON(k, v, silent) { localStorage.setItem(userKey(k), JSON.stringify(v)); if (!silent && SyncManager) SyncManager.push(); }
 function getWrongBook() { return loadJSON('wrongBook'); }
 function getUnsureBook() { return loadJSON('unsureBook'); }
 function getBookmarks() { return loadJSON('bookmarks'); }
@@ -331,6 +357,248 @@ function init() {
   }).catch(function() {});
 }
 init();
+
+
+// ====== SYNC MANAGER (GitHub Gist) ======
+var SyncManager = {
+  token: null,
+  gistId: null,
+  syncing: false,
+  enabled: true,
+  lastSync: null,
+  pushTimer: null,
+
+  // Simple hash for gist description
+  hash: function(s) {
+    var h = 0;
+    for (var i = 0; i < s.length; i++) { h = ((h << 5) - h + s.charCodeAt(i)) | 0; }
+    return Math.abs(h).toString(36);
+  },
+
+  api: function(path, opts) {
+    var headers = { 'Accept': 'application/vnd.github+json' };
+    if (this.token) headers['Authorization'] = 'Bearer ' + this.token;
+    return fetch('https://api.github.com/' + path, {
+      method: opts && opts.method || 'GET',
+      headers: headers,
+      body: opts && opts.body ? JSON.stringify(opts.body) : undefined
+    }).then(function(r) {
+      if (!r.ok) throw new Error('GitHub API ' + r.status);
+      return r.json();
+    });
+  },
+
+  login: function(username, token) {
+    var self = this;
+    self.token = token;
+    return self.api('user').then(function(user) {
+      // Verify username matches
+      if (user.login.toLowerCase() !== username.toLowerCase()) {
+        throw new Error('用户名与 Token 不匹配');
+      }
+      // Save credentials
+      localStorage.setItem('_sync_token', token);
+      localStorage.setItem('_sync_user', user.login);
+      // Find or create gist
+      return self.findOrCreateGist(user.login);
+    }).then(function(gistId) {
+      self.gistId = gistId;
+      localStorage.setItem('_sync_gist', gistId);
+      self.updateUI(true);
+      // Pull data from gist
+      return self.pull();
+    });
+  },
+
+  findOrCreateGist: function(username) {
+    var self = this;
+    var desc = 'xi-gai-sync-' + self.hash(username);
+    // Search for existing gist
+    return self.api('gists?per_page=100').then(function(gists) {
+      for (var i = 0; i < gists.length; i++) {
+        if (gists[i].description === desc) return gists[i].id;
+      }
+      // Create new gist
+      return self.api('gists', {
+        method: 'POST',
+        body: {
+          description: desc,
+          public: false,
+          files: { 'sync.json': { content: '{}' } }
+        }
+      }).then(function(g) { return g.id; });
+    });
+  },
+
+  logout: function() {
+    this.token = null; this.gistId = null;
+    localStorage.removeItem('_sync_token');
+    localStorage.removeItem('_sync_user');
+    localStorage.removeItem('_sync_gist');
+    this.updateUI(false);
+  },
+
+  isloggedIn: function() {
+    return !!localStorage.getItem('_sync_token');
+  },
+
+  autoLogin: function() {
+    var token = localStorage.getItem('_sync_token');
+    var user = localStorage.getItem('_sync_user');
+    var gist = localStorage.getItem('_sync_gist');
+    if (!token) return;
+    this.token = token;
+    this.gistId = gist;
+    this.updateUI(true);
+    // Verify token still works
+    var self = this;
+    this.api('user').then(function(u) {
+      if (!gist) return self.findOrCreateGist(u.login).then(function(id) {
+        self.gistId = id; localStorage.setItem('_sync_gist', id);
+      });
+    }).then(function() { return self.pull(); })
+    .catch(function() { self.logout(); });
+  },
+
+  collectData: function() {
+    var data = {};
+    ['wrongBook', 'unsureBook', 'bookmarks', 'disputes'].forEach(function(k) {
+      data[k] = loadJSON(k);
+    });
+    data._theme = localStorage.getItem('_theme') || 'light';
+    data._users = JSON.parse(localStorage.getItem('_users') || '["默认用户"]');
+    data._currentUser = currentUser;
+    data._studySeconds = state.studySeconds;
+    data._syncedAt = new Date().toISOString();
+    return data;
+  },
+
+  applyData: function(data) {
+    if (!data || !data._syncedAt) return;
+    ['wrongBook', 'unsureBook', 'bookmarks', 'disputes'].forEach(function(k) {
+      if (data[k]) saveJSON(k, data[k], true); // silent = no re-sync
+    });
+    if (data._theme) localStorage.setItem('_theme', data._theme);
+    if (data._users) localStorage.setItem('_users', JSON.stringify(data._users));
+    if (data._currentUser) {
+      currentUser = data._currentUser;
+      initUsers();
+    }
+    this.lastSync = data._syncedAt;
+    updateBadge();
+  },
+
+  push: function() {
+    if (!this.token || !this.gistId || !this.enabled) return;
+    var self = this;
+    clearTimeout(self.pushTimer);
+    self.pushTimer = setTimeout(function() {
+      self.syncing = true;
+      self.updateUISyncing(true);
+      var data = self.collectData();
+      self.api('gists/' + self.gistId, {
+        method: 'PATCH',
+        body: { files: { 'sync.json': { content: JSON.stringify(data, null, 2) } } }
+      }).then(function() {
+        self.lastSync = new Date().toISOString();
+        self.syncing = false;
+        self.updateUISyncing(false);
+      }).catch(function(e) {
+        self.syncing = false;
+        self.updateUISyncing(false);
+        console.warn('Sync push failed:', e);
+      });
+    }, 2000);
+  },
+
+  pull: function() {
+    if (!this.token || !this.gistId) return Promise.resolve();
+    var self = this;
+    self.syncing = true;
+    self.updateUISyncing(true);
+    return self.api('gists/' + self.gistId).then(function(gist) {
+      var file = gist.files && gist.files['sync.json'];
+      if (file && file.content) {
+        try {
+          var remote = JSON.parse(file.content);
+          var local = self.collectData();
+          // Merge: use newer timestamp per key
+          if (remote._syncedAt && (!local._syncedAt || remote._syncedAt > local._syncedAt)) {
+            self.applyData(remote);
+          }
+        } catch(e) {}
+      }
+      self.syncing = false;
+      self.updateUISyncing(false);
+    }).catch(function(e) {
+      self.syncing = false;
+      self.updateUISyncing(false);
+    });
+  },
+
+  updateUI: function(loggedIn) {
+    var dot = document.getElementById('sync-dot');
+    var label = document.getElementById('sync-label');
+    if (!dot || !label) return;
+    if (loggedIn) {
+      dot.className = 'dot online';
+      label.textContent = localStorage.getItem('_sync_user') || '已登录';
+    } else {
+      dot.className = 'dot';
+      label.textContent = '未登录';
+    }
+  },
+
+  updateUISyncing: function(syncing) {
+    var dot = document.getElementById('sync-dot');
+    if (!dot) return;
+    if (syncing) dot.className = 'dot syncing';
+    else if (this.isloggedIn()) dot.className = 'dot online';
+  }
+};
+
+function showSyncModal() {
+  if (SyncManager.isloggedIn()) {
+    // Show logout option
+    if (confirm('当前登录: ' + localStorage.getItem('_sync_user') + '\n\n是否退出登录？（数据仍保留在本地）')) {
+      SyncManager.logout();
+    }
+    return;
+  }
+  document.getElementById('login-modal').style.display = 'flex';
+  document.getElementById('login-user').focus();
+}
+
+function doLogin() {
+  var username = document.getElementById('login-user').value.trim();
+  var token = document.getElementById('login-token').value.trim();
+  var errEl = document.getElementById('login-error');
+  errEl.style.display = 'none';
+
+  if (!username || !token) {
+    errEl.textContent = '请填写用户名和 Token'; errEl.style.display = 'block'; return;
+  }
+  if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
+    errEl.textContent = 'Token 格式不对，应以 ghp_ 或 github_pat_ 开头'; errEl.style.display = 'block'; return;
+  }
+
+  errEl.textContent = '验证中...'; errEl.style.display = 'block'; errEl.style.color = 'var(--text2)';
+
+  SyncManager.login(username, token).then(function() {
+    document.getElementById('login-modal').style.display = 'none';
+    errEl.style.display = 'none';
+    // Re-render settings if on settings view
+    if (state.view === 'settings') renderSettings();
+  }).catch(function(e) {
+    errEl.textContent = '登录失败: ' + (e.message || '未知错误');
+    errEl.style.color = 'var(--danger)';
+    errEl.style.display = 'block';
+  });
+}
+
+// Auto-login on page load
+SyncManager.autoLogin();
+
 
 // ====== BADGE ======
 function updateBadge() {
@@ -712,7 +980,7 @@ function exportPDF(qids, ansMode) {
   h.push('.ans-item strong{color:#4a6cf7}');
   h.push('@media print{body{padding:0 12px}.q-item{break-inside:avoid;page-break-inside:avoid}}');
   h.push('@media(max-width:600px){body{padding:12px 8px}h1{font-size:19px}.q-text{font-size:14px}.q-opts{font-size:13px}}');
-  h.push('</style></head><body>');
+  h.push('');
   h.push('<h1>习概错题集</h1>');
   h.push('<p class="meta">' + currentUser + ' · ' + new Date().toLocaleString() + ' · ' + qs.length + '题</p>');
 
@@ -743,8 +1011,8 @@ function exportPDF(qids, ansMode) {
       h.push('</div>');
     });
   });
-  h.push('</body></html>');
   if (ansMode === 'end') h = h.concat(ansHead.concat('</div>'));
+  h.push('</body></html>');
 
   var w = window.open('', '_blank');
   if (!w) { alert('弹窗被拦截，请允许本站弹窗后重试'); return; }
@@ -1133,5 +1401,23 @@ function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g
 // ====== USER INIT ======
 initUsers();
 </script>
+
+<!-- Login Modal -->
+<div class="modal-overlay" id="login-modal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+  <div class="modal-box">
+    <h3 id="login-modal-title">登录以同步数据</h3>
+    <label>GitHub 用户名</label>
+    <input id="login-user" placeholder="your-username" autocomplete="username">
+    <label>Personal Access Token</label>
+    <input id="login-token" type="password" placeholder="ghp_xxxx..." autocomplete="off">
+    <div class="error" id="login-error"></div>
+    <div class="hint">需要 <a href="https://github.com/settings/tokens/new?scopes=gist&description=xi-gai-sync" target="_blank">创建 PAT</a>，勾选 <b>gist</b> 权限即可。<br>数据存在你的 Secret Gist 里，不会公开。</div>
+    <div class="modal-actions">
+      <button onclick="document.getElementById('login-modal').style.display='none'">取消</button>
+      <button class="btn-primary" onclick="doLogin()">登录</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
