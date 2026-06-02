@@ -169,6 +169,7 @@ body {
 .essay-item .eq-meta span { margin-right: 12px; padding: 1px 8px; border-radius: 10px; background: var(--hover); }
 .essay-item .eq-answer { font-size: 14px; color: var(--text); line-height: 1.9; margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); display: none; }
 .essay-item.open .eq-answer { display: block; }
+.eq-answer .key-sentence { color: var(--primary); font-weight: 600; }
 .essay-item.open { border-left-color: var(--success); }
 .essay-filter { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
 .essay-filter button { padding: 6px 14px; border: 1px solid var(--border); border-radius: 20px; background: var(--bg); color: var(--text); font-size: 13px; cursor: pointer; }
@@ -1362,9 +1363,16 @@ function renderEssayView() {
     html += '<div class="essay-chapter"><h3>' + ch.name + ' (' + qs.length + ')</h3>';
     qs.forEach(function(q) {
       totalShown++;
-      var ansHtml = esc(q.answer).replace(/\n/g, '<br>');
-      // Highlight first sentence of each point (text before 。)
-      ansHtml = ansHtml.replace(/([^<]{3,50}?。)/g, '<strong>$1</strong>');
+      var ansRaw = q.answer || '';
+      var ansLines = ansRaw.split('\n').map(function(line) {
+        var trimmed = line.trim();
+        var m = trimmed.match(/^((?:（\d+）|\d+[.、）]|①|②|③|④|⑤|⑥|⑦|⑧|⑨|⑩|[一二三四五六七八九十]+[、.]).*?。)/);
+        if (m) {
+          return '<span class="key-sentence">' + esc(m[1]) + '</span>' + esc(trimmed.substring(m[1].length));
+        }
+        return esc(trimmed);
+      });
+      var ansHtml = ansLines.join('<br>');
       html += '<div class="essay-item" id="essay-' + q.id + '">' +
         '<div class="eq-q" onclick="toggleEssay(\'' + q.id + '\')">' + esc(q.question) + '</div>' +
         '<div class="eq-meta">' +
