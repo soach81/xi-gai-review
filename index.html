@@ -24,7 +24,7 @@
 body {
   font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.6;
-  height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom, 0);
+  height: 100dvh; height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding-bottom: env(safe-area-inset-bottom, 0);
 }
 .topbar {
   background: var(--surface); border-bottom: 1px solid var(--border);
@@ -42,12 +42,12 @@ body {
   font-size: 11px; font-weight: 700; min-width: 22px; text-align: center; line-height: 18px;
 }
 .topbar .stat { font-size: 11px; color: var(--text2); font-weight: 500; }
-.main { flex: 1; overflow: hidden; position: relative; }
+.main { flex: 1; overflow: hidden; position: relative; padding-bottom: var(--bottom-h); }
 .bottom-nav {
   height: var(--bottom-h); background: var(--surface); border-top: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: space-around; flex-shrink: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-around; z-index: 100;
   overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
-  position: relative; clear: both;
+  position: fixed; bottom: 0; left: 0; right: 0;
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
 .bottom-nav button {
