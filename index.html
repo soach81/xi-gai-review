@@ -219,10 +219,11 @@ body {
   .card-flip { padding: 20px 16px; min-height: 160px; max-width: 100%; box-sizing: border-box; overflow: hidden; word-break: break-word; }
   .card-flip .card-front { font-size: 15px; line-height: 1.6; }
   .card-flip .card-back { font-size: 14px; margin-top: 14px; padding-top: 14px; }
-  #view-cards { padding: 16px 12px; }
-  #view-cards .quiz-top { gap: 8px; }
-  #view-cards .quiz-top select { max-width: 100%; font-size: 12px; padding: 5px 8px; }
-  #view-cards .quiz-top button { white-space: nowrap; font-size: 13px; padding: 8px 14px; }
+  #view-cards { padding: 16px 12px; overflow: hidden; }
+  #view-cards .quiz-top { gap: 8px; width: 100%; box-sizing: border-box; }
+  #view-cards .quiz-top select { max-width: 100%; font-size: 12px; padding: 5px 8px; box-sizing: border-box; }
+  #view-cards .quiz-top button { white-space: nowrap; font-size: 13px; padding: 8px 14px; flex-shrink: 0; }
+  #card-content { width: 100%; box-sizing: border-box; overflow: hidden; }
   .bottom-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .bottom-nav::-webkit-scrollbar { display: none; }
 }
@@ -595,40 +596,37 @@ var SyncManager = {
   }
 };
 
-function showSyncModal() {
+function toggleSync() {
   if (SyncManager.isloggedIn()) {
-    // Show logout option
-    if (confirm('当前登录: ' + localStorage.getItem('_sync_user') + '\n\n是否退出登录？（数据仍保留在本地）')) {
+    if (confirm('同步已开启\n账号: ' + localStorage.getItem('_sync_user') + '\n\n关闭同步？')) {
       SyncManager.logout();
     }
     return;
   }
-  document.getElementById('login-modal').style.display = 'flex';
-  document.getElementById('login-user').focus();
+  document.getElementById('sync-token-input').value = '';
+  document.getElementById('sync-error').style.display = 'none';
+  document.getElementById('sync-modal').style.display = 'flex';
+  document.getElementById('sync-token-input').focus();
 }
 
-function doLogin() {
-  var username = document.getElementById('login-user').value.trim();
-  var token = document.getElementById('login-token').value.trim();
-  var errEl = document.getElementById('login-error');
+function doSyncLogin() {
+  var token = document.getElementById('sync-token-input').value.trim();
+  var errEl = document.getElementById('sync-error');
   errEl.style.display = 'none';
 
-  if (!username || !token) {
-    errEl.textContent = '请填写用户名和 Token'; errEl.style.display = 'block'; return;
-  }
+  if (!token) { errEl.textContent = '请输入同步码'; errEl.style.display = 'block'; return; }
   if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
-    errEl.textContent = 'Token 格式不对，应以 ghp_ 或 github_pat_ 开头'; errEl.style.display = 'block'; return;
+    errEl.textContent = '格式不对，应以 ghp_ 或 github_pat_ 开头'; errEl.style.display = 'block'; return;
   }
 
   errEl.textContent = '验证中...'; errEl.style.display = 'block'; errEl.style.color = 'var(--text2)';
 
-  SyncManager.login(username, token).then(function() {
-    document.getElementById('login-modal').style.display = 'none';
+  SyncManager.loginWithCode(token).then(function() {
+    document.getElementById('sync-modal').style.display = 'none';
     errEl.style.display = 'none';
-    // Re-render settings if on settings view
     if (state.view === 'settings') renderSettings();
   }).catch(function(e) {
-    errEl.textContent = '登录失败: ' + (e.message || '未知错误');
+    errEl.textContent = '同步码无效: ' + (e.message || '请检查');
     errEl.style.color = 'var(--danger)';
     errEl.style.display = 'block';
   });
@@ -1452,19 +1450,17 @@ function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g
 initUsers();
 </script>
 
-<!-- Login Modal -->
-<div class="modal-overlay" id="login-modal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
+<!-- Sync Modal -->
+<div class="modal-overlay" id="sync-modal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
   <div class="modal-box">
-    <h3 id="login-modal-title">登录以同步数据</h3>
-    <label>GitHub 用户名</label>
-    <input id="login-user" placeholder="your-username" autocomplete="username">
-    <label>Personal Access Token</label>
-    <input id="login-token" type="password" placeholder="ghp_xxxx..." autocomplete="off">
-    <div class="error" id="login-error"></div>
-    <div class="hint">需要 <a href="https://github.com/settings/tokens/new?scopes=gist&description=xi-gai-sync" target="_blank">创建 PAT</a>，勾选 <b>gist</b> 权限即可。<br>数据存在你的 Secret Gist 里，不会公开。</div>
+    <h3>输入同步码</h3>
+    <label>GitHub Token（ghp_ 开头）</label>
+    <input id="sync-token-input" type="password" placeholder="ghp_xxxx..." autocomplete="off">
+    <div class="error" id="sync-error"></div>
+    <div class="hint">找对方要同步码即可同步数据。首次使用点<a href="https://github.com/settings/tokens/new?scopes=gist&description=xi-gai-sync" target="_blank">这里</a>创建 Token（勾选 gist 权限）。</div>
     <div class="modal-actions">
-      <button onclick="document.getElementById('login-modal').style.display='none'">取消</button>
-      <button class="btn-primary" onclick="doLogin()">登录</button>
+      <button onclick="document.getElementById('sync-modal').style.display='none'">取消</button>
+      <button class="btn-primary" onclick="doSyncLogin()">同步</button>
     </div>
   </div>
 </div>
