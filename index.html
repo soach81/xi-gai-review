@@ -1056,7 +1056,19 @@ function exportPDF(qids, ansMode) {
   if (!w) { alert('弹窗被拦截，请允许本站弹窗后重试'); return; }
   w.document.write(h.join('\n'));
   w.document.close();
-  setTimeout(function() { w.print(); }, 500);
+  // On mobile, try to trigger download; on desktop, print
+  var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    // For mobile: add html2pdf script and generate PDF download
+    var script = w.document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    script.onload = function() {
+      w.html2pdf().set({ margin: [12, 8], filename: filename + '.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } }).from(w.document.body).save();
+    };
+    w.document.head.appendChild(script);
+  } else {
+    setTimeout(function() { w.print(); }, 500);
+  }
 }
 
 function exportMD(qids, ansMode) {
