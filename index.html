@@ -24,7 +24,7 @@
 body {
   font-family: -apple-system, "Microsoft YaHei", "PingFang SC", sans-serif;
   background: var(--bg); color: var(--text); line-height: 1.6;
-  height: 100vh; overflow: hidden; display: flex; flex-direction: column;
+  height: calc(var(--vh, 1vh) * 100); overflow: hidden; display: flex; flex-direction: column;
 }
 .topbar {
   background: var(--surface); border-bottom: 1px solid var(--border);
@@ -46,11 +46,13 @@ body {
 .bottom-nav {
   height: var(--bottom-h); background: var(--surface); border-top: 1px solid var(--border);
   display: flex; align-items: center; justify-content: space-around; flex-shrink: 0; z-index: 100;
+  overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
 }
 .bottom-nav button {
-  flex: 1; height: 100%; border: none; background: none; color: var(--text2);
+  flex: 0 0 auto; min-width: 0; height: 100%; border: none; background: none; color: var(--text2);
   font-size: 11px; font-weight: 500; cursor: pointer; display: flex;
   flex-direction: column; align-items: center; justify-content: center; gap: 2px;
+  padding: 0 2px;
 }
 .bottom-nav button .ico { font-size: 20px; }
 .bottom-nav button.active { color: var(--primary); font-weight: 700; }
@@ -130,7 +132,7 @@ body {
 .wrong-item .wi-yours { font-size: 13px; color: var(--danger); font-weight: 600; }
 .wrong-item button { padding: 5px 14px; font-size: 12px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg); cursor: pointer; }
 
-#view-cards { flex-direction: column; align-items: center; padding: 24px; }
+#view-cards { flex-direction: column; align-items: stretch; padding: 24px; overflow-x: hidden; }
 .card-flip {
   background: var(--surface); border-radius: var(--radius); padding: 36px 28px;
   max-width: 480px; width: 100%; text-align: center; box-shadow: var(--shadow-lg);
@@ -218,6 +220,11 @@ body {
   .card-flip .card-front { font-size: 15px; line-height: 1.6; }
   .card-flip .card-back { font-size: 14px; margin-top: 14px; padding-top: 14px; }
   #view-cards { padding: 16px 12px; }
+  #view-cards .quiz-top { gap: 8px; }
+  #view-cards .quiz-top select { max-width: 100%; font-size: 12px; padding: 5px 8px; }
+  #view-cards .quiz-top button { white-space: nowrap; font-size: 13px; padding: 8px 14px; }
+  .bottom-nav { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .bottom-nav::-webkit-scrollbar { display: none; }
 }
 
 /* Sync & Login */
@@ -344,6 +351,14 @@ function isUnsure(qid) { return !!getUnsureBook()[qid]; }
 function isDisputed(qid) { return !!getDisputes()[qid]; }
 function getWrongCount(qid) { return getWrongBook()[qid] || 0; }
 function toggleDispute(qid) { var d = getDisputes(); if (d[qid]) { delete d[qid]; } else { d[qid] = {time: Date.now()}; } saveJSON('disputes',d); }
+
+// ====== VIEWPORT HEIGHT FIX ======
+function setVH() {
+  var vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', vh + 'px');
+}
+setVH();
+window.addEventListener('resize', setVH);
 
 // ====== INIT ======
 function init() {
@@ -1049,7 +1064,19 @@ function exportPDF(qids, ansMode) {
   if (!w) { alert('弹窗被拦截，请允许本站弹窗后重试'); return; }
   w.document.write(h.join('\n'));
   w.document.close();
-  setTimeout(function() { w.print(); }, 500);
+  // On mobile, try to trigger download; on desktop, print
+  var isMobile = /Android|iPhone|iPad|iPod|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile) {
+    // For mobile: add html2pdf script and generate PDF download
+    var script = w.document.createElement('script');
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    script.onload = function() {
+      w.html2pdf().set({ margin: [12, 8], filename: filename + '.pdf', html2canvas: { scale: 2 }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' } }).from(w.document.body).save();
+    };
+    w.document.head.appendChild(script);
+  } else {
+    setTimeout(function() { w.print(); }, 500);
+  }
 }
 
 function exportMD(qids, ansMode) {
