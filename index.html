@@ -1361,14 +1361,17 @@ function renderEssayView() {
     html += '<div class="essay-chapter"><h3>' + ch.name + ' (' + qs.length + ')</h3>';
     qs.forEach(function(q) {
       totalShown++;
-      html += '<div class="essay-item" id="essay-' + q.id + '" onclick="toggleEssay(\'' + q.id + '\')">' +
-        '<div class="eq-q">' + esc(q.question) + '</div>' +
+      var ansHtml = esc(q.answer).replace(/\n/g, '<br>');
+      // Highlight first sentence of each point (text before 。)
+      ansHtml = ansHtml.replace(/([^<]{3,50}?。)/g, '<strong>$1</strong>');
+      html += '<div class="essay-item" id="essay-' + q.id + '">' +
+        '<div class="eq-q" onclick="toggleEssay(\'' + q.id + '\')">' + esc(q.question) + '</div>' +
         '<div class="eq-meta">' +
         (q.source ? '<span>' + esc(q.source) + '</span>' : '') +
         (q.type ? '<span>' + esc(q.type) + '</span>' : '') +
         (q.tags ? q.tags.map(function(t) { return '<span>' + t + '</span>'; }).join('') : '') +
         '</div>' +
-        '<div class="eq-answer">' + esc(q.answer).replace(/\n/g, '<br>') + '</div>' +
+        '<div class="eq-answer" onclick="toggleEssay(\'' + q.id + '\')">' + ansHtml + '</div>' +
         '</div>';
     });
     html += '</div>';
