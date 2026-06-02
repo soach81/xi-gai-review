@@ -27,8 +27,9 @@ body {
   height: 100vh; overflow: hidden; display: flex; flex-direction: column;
 }
 .topbar {
-  height: var(--nav-h); background: var(--surface); border-bottom: 1px solid var(--border);
-  display: flex; align-items: center; padding: 0 14px; gap: 10px; z-index: 100; flex-shrink: 0;
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; padding: 0 14px; gap: 8px; z-index: 100; flex-shrink: 0;
+  flex-wrap: wrap; min-height: var(--nav-h);
 }
 .topbar .logo { font-weight: 800; font-size: 15px; white-space: nowrap; }
 .topbar select, .topbar button {
@@ -210,9 +211,13 @@ body {
   #view-slides .slide-controls button { padding: 10px 20px; font-size: 14px; }
   .topbar .logo { font-size: 13px; }
   .topbar select, .topbar button { padding: 5px 8px; font-size: 12px; }
-  .card-flip { padding: 24px 20px; min-height: 200px; }
-  .card-flip .card-front { font-size: 16px; }
-  .card-flip .card-back { font-size: 15px; }
+  .topbar .sync-status #sync-label { display: none; }
+  .topbar .stat { font-size: 10px; }
+  .topbar .badge { padding: 1px 6px; font-size: 10px; min-width: 18px; }
+  .card-flip { padding: 20px 16px; min-height: 160px; max-width: 100%; box-sizing: border-box; overflow: hidden; word-break: break-word; }
+  .card-flip .card-front { font-size: 15px; line-height: 1.6; }
+  .card-flip .card-back { font-size: 14px; margin-top: 14px; padding-top: 14px; }
+  #view-cards { padding: 16px 12px; }
 }
 
 /* Sync & Login */

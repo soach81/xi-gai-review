@@ -1598,8 +1598,25 @@ bt.addEventListener('click', function() { window.scrollTo({top:0,behavior:'smoot
       if (node.nodeType === 1) { if (/^(H2|H3|H4|H5)$/i.test(node.tagName)) chL = node.textContent.trim().slice(0,30); if (!/^(SCRIPT|STYLE|MARK|BUTTON|DETAILS)$/i.test(node.tagName)) for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], chL); }
     } walk(cd, ''); if (!ms.length) { sr.classList.remove('show'); return; } ms.forEach(function(m, idx) { var d = document.createElement('div'); d.className = 'search-result'; d.setAttribute('data-idx', idx); d.innerHTML = (m.c ? '<div class="ch-label">' + m.c + '</div>' : '') + '<div class="ctx">' + m.s.replace(rx, '<em>$1</em>') + '</div>'; d.addEventListener('click', function() { jump(idx); }); sr.appendChild(d); ri.push({d: d, n: m.n}); }); sr.classList.add('show'); }
 
-  function jump(idx) { if (!ri.length) return; if (idx < 0) idx = ri.length - 1; if (idx >= ri.length) idx = 0; ci = idx; hl.forEach(function(el) { el.parentNode.replaceChild(document.createTextNode(el.textContent), el); }); hl = []; var t = ri[idx].n, q = si.value.trim(), rx = new RegExp('(' + esc(q) + ')', 'gi'); var txt = t.textContent, spn = document.createElement('span'), li = 0, m; rx.lastIndex = 0; while ((m = rx.exec(txt)) !== null) { if (m.index > li) spn.appendChild(document.createTextNode(txt.substring(li, m.index))); var mk = document.createElement('mark'); mk.className = 'search-highlight active'; mk.textContent = m[0]; spn.appendChild(mk); hl.push(mk); li = m.index + m[0].length; }
-    if (li < txt.length) spn.appendChild(document.createTextNode(txt.substring(li))); t.parentNode.replaceChild(spn, t); if (hl.length) hl[0].scrollIntoView({behavior:'smooth', block:'center'}); sc.textContent = (idx+1) + '/' + ri.length; sp.disabled = false; sn.disabled = false; ri.forEach(function(r, i) { r.d.classList.toggle('active', i === idx); }); ri[idx].d.scrollIntoView({block:'nearest'}); }
+  function jump(idx) { if (!ri.length) return; if (idx < 0) idx = ri.length - 1; if (idx >= ri.length) idx = 0; ci = idx;
+    /* clear old highlights and normalize DOM to get fresh text nodes */
+    hl.forEach(function(el) { if (el.parentNode) el.parentNode.replaceChild(document.createTextNode(el.textContent), el); }); hl = [];
+    (function norm(node) { if (node.nodeType === 1) { for (var i = node.childNodes.length-1; i >= 0; i--) norm(node.childNodes[i]); node.normalize(); } })(cd);
+    /* re-walk to rebuild ri with fresh text node references */
+    ri = []; var q = si.value.trim(), rx = new RegExp('(' + esc(q) + ')', 'gi');
+    function walk(node, chL) { if (node.nodeType === 3 && node.textContent.trim()) { var t = node.textContent; rx.lastIndex = 0; if (rx.test(t)) ri.push({n: node, c: chL || ''}); return; }
+      if (node.nodeType === 1) { if (/^(H2|H3|H4|H5)$/i.test(node.tagName)) chL = node.textContent.trim().slice(0,30); if (!/^(SCRIPT|STYLE|MARK|BUTTON|DETAILS)$/i.test(node.tagName)) for (var i = 0; i < node.childNodes.length; i++) walk(node.childNodes[i], chL); } }
+    walk(cd, '');
+    if (!ri.length) return;
+    /* find the closest match to the requested index */
+    if (idx >= ri.length) idx = ri.length - 1; ci = idx;
+    /* highlight the target match */
+    var t = ri[idx].n, txt = t.textContent, spn = document.createElement('span'), li = 0, m; rx.lastIndex = 0;
+    while ((m = rx.exec(txt)) !== null) { if (m.index > li) spn.appendChild(document.createTextNode(txt.substring(li, m.index))); var mk = document.createElement('mark'); mk.className = 'search-highlight active'; mk.textContent = m[0]; spn.appendChild(mk); hl.push(mk); li = m.index + m[0].length; }
+    if (li < txt.length) spn.appendChild(document.createTextNode(txt.substring(li))); t.parentNode.replaceChild(spn, t);
+    if (hl.length) hl[0].scrollIntoView({behavior:'smooth', block:'center'});
+    sc.textContent = (idx+1) + '/' + ri.length; sp.disabled = false; sn.disabled = false;
+    ri.forEach(function(r, i) { r.d.classList.toggle('active', i === idx); }); ri[idx].d.scrollIntoView({block:'nearest'}); }
 
   var tm; si.addEventListener('input', function() { clearTimeout(tm); var q = si.value.trim(); clr(); if (!q) return; tm = setTimeout(function() { build(q); if (ri.length) sc.textContent = '0/'+ri.length; sp.disabled = sn.disabled = false; }, 150); }); si.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); if (ri.length) jump(ci < 0 ? 0 : ci + 1); } else if (e.key === 'Escape') { si.value = ''; clr(); si.blur(); } }); sp.addEventListener('click', function() { jump(ci - 1); }); sn.addEventListener('click', function() { jump(ci + 1); }); document.addEventListener('click', function(e) { if (!sr.contains(e.target) && e.target !== si) sr.classList.remove('show'); }); document.addEventListener('keydown', function(e) { if ((e.ctrlKey || e.metaKey) && e.key === 'f' && document.activeElement !== si) { e.preventDefault(); si.focus(); si.select(); }
   });
