@@ -58,7 +58,7 @@ body {
 }
 .bottom-nav button .ico { font-size: 20px; }
 .bottom-nav button.active { color: var(--primary); font-weight: 700; }
-.view { display: none; position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; z-index: 1; }
+.view { display: none; position: absolute; top: 0; left: 0; right: 0; bottom: var(--bottom-h); overflow-y: auto; overflow-x: hidden; z-index: 1; }
 .view.active { display: flex; animation: fadeIn 0.2s ease; }
 @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
