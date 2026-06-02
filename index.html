@@ -205,6 +205,9 @@ body {
   .quiz-card .option { padding: 12px 14px; font-size: 14px; margin: 6px 0; border-radius: 8px; }
   .quiz-card .option:active { transform: scale(0.98); }
   .quiz-result .score { font-size: 48px; }
+  .wrong-chapter h3 { font-size: 14px; word-break: break-word; }
+  .wrong-item .wi-q { font-size: 14px; }
+  .wrong-item { padding: 12px 14px; }
   .bottom-nav { height: 50px; }
   .bottom-nav button { font-size: 10px; gap: 1px; }
   .bottom-nav button .ico { font-size: 18px; }
@@ -915,7 +918,7 @@ function flagQuizDispute() { var q = state.quizQuestions[state.quizIndex]; toggl
 function renderWrongBook() {
   var c = document.getElementById('view-wrong'), wb = getWrongBook(), db = getDisputes();
   var entries = Object.entries(wb).sort(function(a,b) { return b[1]-a[1]; });
-  var h = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap"><h2 style="flex:1">错题本</h2>';
+  var h = '<div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;flex-wrap:wrap"><h2 style="flex:1;font-size:20px;white-space:nowrap">错题本</h2>';
   h += '<button onclick="selectAllWrong()" class="no-print" style="padding:6px 12px;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:12px">全选</button>';
   h += '<button onclick="deselectAllWrong()" class="no-print" style="padding:6px 12px;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:12px">取消</button>';
   h += '<span style="font-size:12px;color:var(--text2)">|</span>';
