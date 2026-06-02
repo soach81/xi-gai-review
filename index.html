@@ -199,7 +199,17 @@ body {
   #view-quiz, #view-exam, #view-wrong, #view-settings { max-width: 100%; padding: 12px; }
   .quiz-card { padding: 16px; }
   .quiz-card .q-text { font-size: 15px; }
+  .quiz-card .option { padding: 12px 14px; font-size: 14px; margin: 6px 0; border-radius: 8px; }
+  .quiz-card .option:active { transform: scale(0.98); }
   .quiz-result .score { font-size: 48px; }
+  .bottom-nav { height: 50px; }
+  .bottom-nav button { font-size: 10px; }
+  .bottom-nav button .ico { font-size: 18px; }
+  .topbar .logo { font-size: 13px; }
+  .topbar select, .topbar button { padding: 5px 8px; font-size: 12px; }
+  .card-flip { padding: 24px 20px; min-height: 200px; }
+  .card-flip .card-front { font-size: 16px; }
+  .card-flip .card-back { font-size: 15px; }
 }
 
 /* Sync & Login */
@@ -234,7 +244,7 @@ body {
   <span class="logo">习概复习</span>
   <select id="user-select"></select>
   <span class="spacer"></span>
-  <span class="sync-status" id="sync-status" onclick="showSyncModal()" title="点击登录以跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">未登录</span></span>
+  <span class="sync-status" id="sync-status" onclick="toggleSync()" title="跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">同步</span></span>
   <span class="stat" id="stat-time">⏱ 0分钟</span>
   <span class="badge" id="wrong-badge" style="display:none">0</span>
   <button id="btn-dark" title="暗色模式">🌙</button>
@@ -388,26 +398,39 @@ var SyncManager = {
     });
   },
 
-  login: function(username, token) {
+  loginWithCode: function(code) {
     var self = this;
-    self.token = token;
+    self.token = code;
     return self.api('user').then(function(user) {
-      // Verify username matches
-      if (user.login.toLowerCase() !== username.toLowerCase()) {
-        throw new Error('用户名与 Token 不匹配');
-      }
-      // Save credentials
-      localStorage.setItem('_sync_token', token);
+      localStorage.setItem('_sync_token', code);
       localStorage.setItem('_sync_user', user.login);
-      // Find or create gist
       return self.findOrCreateGist(user.login);
     }).then(function(gistId) {
       self.gistId = gistId;
       localStorage.setItem('_sync_gist', gistId);
       self.updateUI(true);
-      // Pull data from gist
       return self.pull();
     });
+  },
+
+  setup: function(token) {
+    var self = this;
+    self.token = token;
+    return self.api('user').then(function(user) {
+      localStorage.setItem('_sync_token', token);
+      localStorage.setItem('_sync_user', user.login);
+      return self.findOrCreateGist(user.login);
+    }).then(function(gistId) {
+      self.gistId = gistId;
+      localStorage.setItem('_sync_gist', gistId);
+      self.syncCode = token;
+      self.updateUI(true);
+      return self.push();
+    });
+  },
+
+  login: function(username, token) {
+    return this.loginWithCode(token);
   },
 
   findOrCreateGist: function(username) {
