@@ -1380,14 +1380,14 @@ function renderEssayView() {
     html += '<div class="essay-chapter"><h3>' + ch.name + ' (' + qs.length + ')</h3>';
     qs.forEach(function(q) {
       totalShown++;
-      html += '<div class="essay-item" id="essay-' + q.id + '" onclick="toggleEssay(\'' + q.id + '\')">' +
-        '<div class="eq-q">' + esc(q.question) + '</div>' +
+      html += '<div class="essay-item" id="essay-' + q.id + '">' +
+        '<div class="eq-q" onclick="toggleEssay(\'' + q.id + '\')">' + esc(q.question) + '</div>' +
         '<div class="eq-meta">' +
         (q.source ? '<span>' + esc(q.source) + '</span>' : '') +
         (q.type ? '<span>' + esc(q.type) + '</span>' : '') +
         (q.tags ? q.tags.map(function(t) { return '<span>' + t + '</span>'; }).join('') : '') +
         '</div>' +
-        '<div class="eq-answer">' + esc(q.answer).replace(/\n/g, '<br>') + '</div>' +
+        '<div class="eq-answer" contenteditable="true">' + esc(q.answer).replace(/\n/g, '<br>') + '</div>' +
         '</div>';
     });
     html += '</div>';
@@ -1402,6 +1402,74 @@ function toggleEssay(eid) {
   var el = document.getElementById('essay-' + eid);
   if (el) el.classList.toggle('open');
 }
+
+// Essay answer marking tools
+var markToolbar = null;
+function createMarkToolbar() {
+  if (markToolbar) return markToolbar;
+  markToolbar = document.createElement('div');
+  markToolbar.id = 'mark-toolbar';
+  markToolbar.innerHTML = '<button onclick="markHighlight()" title="高亮">🖍</button><button onclick="markUnderline()" title="下划线">U̲</button><button onclick="markClear()" title="清除">✕</button>';
+  markToolbar.style.cssText = 'display:none;position:fixed;z-index:999;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:4px 8px;box-shadow:var(--shadow-lg);gap:4px;';
+  document.body.appendChild(markToolbar);
+  return markToolbar;
+}
+
+function markHighlight() {
+  var sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  var range = sel.getRangeAt(0);
+  var span = document.createElement('span');
+  span.style.cssText = 'background:#fef08a;padding:1px 2px;border-radius:2px;';
+  range.surroundContents(span);
+  sel.removeAllRanges();
+  hideMarkToolbar();
+}
+
+function markUnderline() {
+  var sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  var range = sel.getRangeAt(0);
+  var span = document.createElement('span');
+  span.style.cssText = 'text-decoration:underline;text-decoration-color:var(--primary);text-underline-offset:3px;';
+  range.surroundContents(span);
+  sel.removeAllRanges();
+  hideMarkToolbar();
+}
+
+function markClear() {
+  var sel = window.getSelection();
+  if (!sel.rangeCount) return;
+  var node = sel.anchorNode;
+  while (node && node !== document.body) {
+    if (node.tagName === 'SPAN' && node.parentNode) {
+      node.parentNode.replaceChild(document.createTextNode(node.textContent), node);
+      break;
+    }
+    node = node.parentNode;
+  }
+  sel.removeAllRanges();
+  hideMarkToolbar();
+}
+
+function hideMarkToolbar() {
+  if (markToolbar) markToolbar.style.display = 'none';
+}
+
+document.addEventListener('selectionchange', function() {
+  var sel = window.getSelection();
+  if (!sel.rangeCount || sel.isCollapsed) { hideMarkToolbar(); return; }
+  var range = sel.getRangeAt(0);
+  var container = range.commonAncestorContainer;
+  // Only show toolbar if selection is inside an eq-answer
+  var answerEl = container.nodeType === 3 ? container.parentNode.closest('.eq-answer') : container.closest('.eq-answer');
+  if (!answerEl) { hideMarkToolbar(); return; }
+  var rect = range.getBoundingClientRect();
+  var tb = createMarkToolbar();
+  tb.style.display = 'flex';
+  tb.style.left = Math.max(10, rect.left + rect.width/2 - 40) + 'px';
+  tb.style.top = (rect.top - 40) + 'px';
+});
 
 // ====== SETTINGS ======
 function renderSettings() {
