@@ -1010,13 +1010,11 @@ function doExport() {
 
 function exportPDF(qids, ansMode) {
   var qs = qids.map(findQuestion).filter(Boolean); if (!qs.length) return;
-  var filename = '习概错题集_' + currentUser + '_' + new Date().toISOString().slice(0,10);
-
-  // Build HTML content
+  var filename = "习概错题集_" + currentUser + "_" + new Date().toISOString().slice(0,10);
   var h = [];
-  h.push('<!DOCTYPE html><html><head><meta charset="UTF-8"><style>');
+  h.push('<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><style>');
   h.push('*{box-sizing:border-box;margin:0;padding:0}');
-  h.push('body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;max-width:780px;margin:0 auto;padding:24px 16px;color:#1a1a2e;line-height:1.8;background:#fff}');
+  h.push('body{font-family:"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif;max-width:780px;margin:0 auto;padding:24px 16px;color:#1a1a2e;line-height:1.8;background:#fff}');
   h.push('h1{text-align:center;font-size:22px;font-weight:800;padding-bottom:12px;border-bottom:3px solid #4a6cf7;margin-bottom:8px}');
   h.push('.meta{text-align:center;color:#999;font-size:12px;margin-bottom:24px}');
   h.push('h2{font-size:17px;font-weight:700;color:#2c5282;margin:28px 0 12px;padding-left:12px;border-left:4px solid #2c5282}');
@@ -1035,54 +1033,52 @@ function exportPDF(qids, ansMode) {
   h.push('.ans-item strong{color:#4a6cf7}');
   h.push('</style></head><body>');
   h.push('<h1>习概错题集</h1>');
-  h.push('<p class="meta">' + currentUser + ' · ' + new Date().toLocaleString() + ' · ' + qs.length + '题</p>');
-
+  h.push('<p class="meta">' + currentUser + " · " + new Date().toLocaleString() + " · " + qs.length + "题</p>");
   var ansHead = ['<div class="ans-section"><h2>答案</h2>'];
   var byCh = {};
-  qs.forEach(function(q) { var cn = (questionData.chapters.find(function(c) { return c.questions.some(function(x) { return x.id === q.id; }); }) || {}).name || '未知'; if (!byCh[cn]) byCh[cn] = []; byCh[cn].push(q); });
+  qs.forEach(function(q) { var cn = (questionData.chapters.find(function(c) { return c.questions.some(function(x) { return x.id === q.id; }); }) || {}).name || "未知"; if (!byCh[cn]) byCh[cn] = []; byCh[cn].push(q); });
   var qi = 0;
   Object.keys(byCh).forEach(function(cn) {
     h.push('<h2>' + cn + '</h2>');
-    if (ansMode === 'end') ansHead.push('<h3 style="color:#2c5282;font-size:15px;margin-top:12px">' + cn + '</h3>');
+    if (ansMode === "end") ansHead.push('<h3 style="color:#2c5282;font-size:15px;margin-top:12px">'+cn+'</h3>');
     byCh[cn].forEach(function(q) {
       qi++;
-      var tl = q.type==='single'?'单选':q.type==='multi'?'多选':'简答';
-      var at = q.options ? q.answer.map(function(a) { return q.options[a]; }).join('；') : q.answer.join('；');
-      var al = q.options ? q.answer.map(function(a) { return 'ABCDEFGH'[a]; }).join('') : '';
-      var tc = q.type==='single'?'single':q.type==='multi'?'multi':'essay';
-      var showMark = (ansMode === 'below');
-      h.push('<div class="q-item"><div class="q-text"><span class="q-num">' + qi + '</span> <span class="q-type ' + tc + '">' + tl + '</span> ' + esc(q.question) + '</div>');
+      var tl = q.type==="single"?"单选":q.type==="multi"?"多选":"简答";
+      var at = q.options ? q.answer.map(function(a) { return q.options[a]; }).join("；") : q.answer.join("；");
+      var al = q.options ? q.answer.map(function(a) { return "ABCDEFGH"[a]; }).join("") : "";
+      var tc = q.type==="single"?"single":q.type==="multi"?"multi":"essay";
+      var showMark = (ansMode === "below");
+      h.push('<div class="q-item"><div class="q-text"><span class="q-num">'+qi+'</span> <span class="q-type '+tc+'">'+tl+'</span> '+esc(q.question)+'</div>');
       if (q.options) {
         h.push('<div class="q-opts">' + q.options.map(function(o,j) {
-          var cls = (showMark && q.answer.indexOf(j)>=0) ? ' q-opt correct' : ' q-opt';
-          var mark = (showMark && q.answer.indexOf(j)>=0) ? '✅ ' : '';
-          return '<div class="' + cls + '">' + mark + 'ABCDEFGH'[j] + '. ' + esc(o) + '</div>';
-        }).join('') + '</div>');
+          var cls = (showMark && q.answer.indexOf(j)>=0) ? " q-opt correct" : " q-opt";
+          var mark = (showMark && q.answer.indexOf(j)>=0) ? "\u2705 " : "";
+          return '<div class="'+cls+'">'+mark+"ABCDEFGH"[j]+". "+esc(o)+"</div>";
+        }).join("") + "</div>");
       }
-      if (ansMode === 'below') h.push('<div class="q-ans">答案：' + (al?al+'. ':'') + esc(at) + '</div>');
-      if (ansMode === 'end') ansHead.push('<div class="ans-item"><strong>' + qi + '.</strong> ' + (al?al+'. ':'') + esc(at) + '</div>');
+      if (ansMode === "below") h.push('<div class="q-ans">答案：'+(al?al+". ":"")+esc(at)+'</div>');
+      if (ansMode === "end") ansHead.push('<div class="ans-item"><strong>'+qi+'.</strong> '+(al?al+". ":"")+esc(at)+'</div>');
       h.push('</div>');
     });
   });
-  if (ansMode === 'end') h = h.concat(ansHead.concat('</div>'));
-  h.push('</body></html>');
+  if (ansMode === "end") h = h.concat(ansHead.concat("</div>"));
+  h.push("</body></html>");
 
-  // Create container and generate PDF
-  var container = document.createElement('div');
-  container.style.cssText = 'position:fixed;top:-9999px;left:-9999px;width:780px;background:#fff';
-  container.innerHTML = h.join('');
+  var container = document.createElement("div");
+  container.style.cssText = "opacity:0;position:absolute;left:0;top:0;width:780px;z-index:-1;background:#fff";
+  container.innerHTML = h.join("");
   document.body.appendChild(container);
 
   function generatePDF() {
     window.html2pdf().set({
       margin: [12, 8],
-      filename: filename + '.pdf',
-      html2canvas: { scale: 2, useCORS: true },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+      filename: filename + ".pdf",
+      html2canvas: { scale: 2, useCORS: true, logging: false },
+      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
     }).from(container).save().then(function() {
       document.body.removeChild(container);
     }).catch(function(e) {
-      alert('PDF 生成失败: ' + e.message);
+      alert("PDF 生成失败: " + e.message);
       document.body.removeChild(container);
     });
   }
@@ -1090,13 +1086,10 @@ function exportPDF(qids, ansMode) {
   if (window.html2pdf) {
     generatePDF();
   } else {
-    var script = document.createElement('script');
-    script.src = 'https://cdn.bootcdn.net/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+    var script = document.createElement("script");
+    script.src = "https://cdn.bootcdn.net/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js";
     script.onload = generatePDF;
-    script.onerror = function() {
-      alert('PDF 库加载失败，请检查网络连接');
-      document.body.removeChild(container);
-    };
+    script.onerror = function() { alert("PDF 库加载失败，请检查网络"); document.body.removeChild(container); };
     document.head.appendChild(script);
   }
 }
