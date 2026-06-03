@@ -382,7 +382,12 @@ function init() {
   // Load essay questions
   fetch('data/essay_questions.json').then(function(r) { return r.json(); }).then(function(d) {
     essayData = d;
-  }).catch(function() {});
+  }).catch(function() {
+    // Retry once after 2 seconds
+    setTimeout(function() {
+      fetch('data/essay_questions.json').then(function(r) { return r.json(); }).then(function(d) { essayData = d; }).catch(function() {});
+    }, 2000);
+  });
   // Load flashcards
   fetch('data/flashcards.json').then(function(r) { return r.json(); }).then(function(d) {
     flashcardData = d;
@@ -515,7 +520,7 @@ var SyncManager = {
       data[k] = loadJSON(k);
     });
     data._theme = localStorage.getItem('_theme') || 'light';
-    data._users = JSON.parse(localStorage.getItem('_users') || '["默认用户"]');
+    data._users = JSON.parse(localStorage.getItem('_users') || '["用户1","用户2"]');
     data._currentUser = currentUser;
     data._studySeconds = state.studySeconds;
     data._syncedAt = new Date().toISOString();
@@ -1400,13 +1405,13 @@ function toggleEssay(eid) {
 // ====== SETTINGS ======
 function renderSettings() {
   var c = document.getElementById('view-settings'), bm = getBookmarks(), bmE = Object.entries(bm);
-  var users = JSON.parse(localStorage.getItem('_users')||'["默认用户"]');
+  var users = JSON.parse(localStorage.getItem('_users')||'["用户1","用户2"]');
   c.innerHTML = '<div class="settings-section"><h3>用户</h3><input id="settings-new-user" placeholder="输入新用户名" style="width:calc(100% - 80px)"><button onclick="addUser()">添加用户</button><p style="font-size:12px;color:var(--text2);margin-top:6px">当前：' + currentUser + '</p></div><div class="settings-section"><h3>数据管理</h3><button onclick="exportBackup()">📥 导出备份</button><button onclick="document.getElementById(\'import-file\').click()">📤 导入备份</button><input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(event)"><button onclick="if(confirm(\'确认清除当前用户所有数据？\')){clearAllData();}" style="color:var(--danger)">🗑 清除数据</button></div><div class="settings-section"><h3>收藏夹 (' + bmE.length + ')</h3>' + (bmE.length ? bmE.map(function(e) { return '<div style="padding:4px 0;font-size:13px">⭐ ' + esc(e[1].text||'') + ' <span style="color:var(--text2)">· ' + (e[1].chapter||'') + '</span></div>'; }).join('') : '<p style="color:var(--text2);font-size:13px">暂无收藏</p>') + '</div><div class="settings-section"><h3>关于</h3><p style="font-size:13px;color:var(--text2)">选择题库 ' + (questionData?questionData.meta.totalQuestions:'?') + ' 题 · 大题 ' + (essayData?essayData.meta.totalQuestions:'?') + ' 题 · 卡片 ' + (flashcardData&&flashcardData.cards?flashcardData.cards.length:'?') + ' 张</p></div>';
 }
 
 function addUser() {
   var name = document.getElementById('settings-new-user').value.trim(); if (!name) return;
-  var users = JSON.parse(localStorage.getItem('_users')||'["默认用户"]');
+  var users = JSON.parse(localStorage.getItem('_users')||'["用户1","用户2"]');
   if (users.indexOf(name) < 0) { users.push(name); localStorage.setItem('_users', JSON.stringify(users)); }
   currentUser = name; initUsers(); renderSettings();
 }
@@ -1437,7 +1442,7 @@ function clearAllData() {
 }
 
 function initUsers() {
-  var users = JSON.parse(localStorage.getItem('_users')||'["默认用户"]');
+  var users = JSON.parse(localStorage.getItem('_users')||'["用户1","用户2"]');
   var sel = document.getElementById('user-select');
   sel.innerHTML = users.map(function(u) { return '<option' + (u===currentUser?' selected':'') + '>' + u + '</option>'; }).join('');
   sel.onchange = function() { currentUser = sel.value; updateBadge(); renderWrongBook(); };
