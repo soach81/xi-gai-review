@@ -1075,7 +1075,18 @@ function exportPDF(qids, ansMode) {
       window.html2pdf().set({
         margin: [12, 8],
         filename: filename + ".pdf",
-        html2canvas: { scale: 2, useCORS: true, logging: false, allowTaint: true },
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          logging: true,
+          allowTaint: true,
+          backgroundColor: "#ffffff",
+          windowWidth: 780,
+          onclone: function(doc) {
+            // Ensure fonts are applied in cloned document
+            doc.body.style.fontFamily = '"PingFang SC","Microsoft YaHei","Noto Sans SC",sans-serif';
+          }
+        },
         jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
       }).from(container).save().then(function() {
         document.body.removeChild(container);
@@ -1083,7 +1094,7 @@ function exportPDF(qids, ansMode) {
         alert("PDF 生成失败: " + e.message);
         document.body.removeChild(container);
       });
-    }, 500);
+    }, 1000);
   }
 
   if (window.html2pdf) {
