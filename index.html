@@ -614,32 +614,32 @@ var SyncManager = {
 
 function showSyncModal() {
   if (SyncManager.isloggedIn()) {
-    // Show logout option
-    if (confirm('当前登录: ' + localStorage.getItem('_sync_user') + '\n\n是否退出登录？（数据仍保留在本地）')) {
+    if (confirm('同步已开启\n账号: ' + localStorage.getItem('_sync_user') + '\n\n关闭同步？')) {
       SyncManager.logout();
     }
     return;
   }
+  document.getElementById('login-token').value = '';
+  document.getElementById('login-error').style.display = 'none';
   document.getElementById('login-modal').style.display = 'flex';
-  document.getElementById('login-user').focus();
+  document.getElementById('login-token').focus();
 }
 
 function doLogin() {
-  var username = document.getElementById('login-user').value.trim();
   var token = document.getElementById('login-token').value.trim();
   var errEl = document.getElementById('login-error');
   errEl.style.display = 'none';
 
-  if (!username || !token) {
-    errEl.textContent = '请填写用户名和 Token'; errEl.style.display = 'block'; return;
+  if (!token) {
+    errEl.textContent = '请输入同步码'; errEl.style.display = 'block'; return;
   }
   if (!token.startsWith('ghp_') && !token.startsWith('github_pat_')) {
-    errEl.textContent = 'Token 格式不对，应以 ghp_ 或 github_pat_ 开头'; errEl.style.display = 'block'; return;
+    errEl.textContent = '格式不对，应以 ghp_ 或 github_pat_ 开头'; errEl.style.display = 'block'; return;
   }
 
   errEl.textContent = '验证中...'; errEl.style.display = 'block'; errEl.style.color = 'var(--text2)';
 
-  SyncManager.login(username, token).then(function() {
+  SyncManager.loginWithCode(token).then(function() {
     document.getElementById('login-modal').style.display = 'none';
     errEl.style.display = 'none';
     // Re-render settings if on settings view
@@ -1469,19 +1469,17 @@ function esc(s) { if (!s) return ''; return s.replace(/&/g,'&amp;').replace(/</g
 initUsers();
 </script>
 
-<!-- Login Modal -->
+<!-- Sync Modal -->
 <div class="modal-overlay" id="login-modal" style="display:none" onclick="if(event.target===this)this.style.display='none'">
   <div class="modal-box">
-    <h3 id="login-modal-title">登录以同步数据</h3>
-    <label>GitHub 用户名</label>
-    <input id="login-user" placeholder="your-username" autocomplete="username">
-    <label>Personal Access Token</label>
+    <h3>输入同步码</h3>
+    <label>GitHub Token（ghp_ 开头）</label>
     <input id="login-token" type="password" placeholder="ghp_xxxx..." autocomplete="off">
     <div class="error" id="login-error"></div>
-    <div class="hint">需要 <a href="https://github.com/settings/tokens/new?scopes=gist&description=xi-gai-sync" target="_blank">创建 PAT</a>，勾选 <b>gist</b> 权限即可。<br>数据存在你的 Secret Gist 里，不会公开。</div>
+    <div class="hint">找对方要同步码即可同步数据。首次使用点<a href="https://github.com/settings/tokens/new?scopes=gist&description=xi-gai-sync" target="_blank">这里</a>创建 Token（勾选 gist 权限）。</div>
     <div class="modal-actions">
       <button onclick="document.getElementById('login-modal').style.display='none'">取消</button>
-      <button class="btn-primary" onclick="doLogin()">登录</button>
+      <button class="btn-primary" onclick="doLogin()">同步</button>
     </div>
   </div>
 </div>
