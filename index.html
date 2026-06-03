@@ -1109,7 +1109,7 @@ function exportPDF(qids, ansMode) {
     generate();
   } else {
     var script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.2/jspdf.umd.min.js';
+    script.src = 'https://cdn.bootcdn.net/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
     script.onload = generate;
     script.onerror = function() { alert('PDF 库加载失败'); };
     document.head.appendChild(script);
