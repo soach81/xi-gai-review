@@ -1065,22 +1065,25 @@ function exportPDF(qids, ansMode) {
   h.push("</body></html>");
 
   var container = document.createElement("div");
-  container.style.cssText = "opacity:0;position:absolute;left:0;top:0;width:780px;z-index:-1;background:#fff";
+  container.style.cssText = "position:absolute;left:-9999px;top:0;width:780px;background:#fff;padding:24px";
   container.innerHTML = h.join("");
   document.body.appendChild(container);
 
   function generatePDF() {
-    window.html2pdf().set({
-      margin: [12, 8],
-      filename: filename + ".pdf",
-      html2canvas: { scale: 2, useCORS: true, logging: false },
-      jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
-    }).from(container).save().then(function() {
-      document.body.removeChild(container);
-    }).catch(function(e) {
-      alert("PDF 生成失败: " + e.message);
-      document.body.removeChild(container);
-    });
+    // Wait for fonts and layout
+    setTimeout(function() {
+      window.html2pdf().set({
+        margin: [12, 8],
+        filename: filename + ".pdf",
+        html2canvas: { scale: 2, useCORS: true, logging: false, allowTaint: true },
+        jsPDF: { unit: "mm", format: "a4", orientation: "portrait" }
+      }).from(container).save().then(function() {
+        document.body.removeChild(container);
+      }).catch(function(e) {
+        alert("PDF 生成失败: " + e.message);
+        document.body.removeChild(container);
+      });
+    }, 500);
   }
 
   if (window.html2pdf) {
