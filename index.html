@@ -216,7 +216,8 @@ body {
   #view-slides .slide-controls button { padding: 10px 20px; font-size: 14px; }
   .topbar .logo { font-size: 13px; }
   .topbar select, .topbar button { padding: 5px 8px; font-size: 12px; }
-  .topbar .sync-status #sync-label { display: none; }
+  .topbar .sync-status { padding: 6px 12px; min-height: 32px; }
+  .topbar .sync-status #sync-label { display: inline; }
   .topbar .stat { font-size: 10px; }
   .topbar .badge { padding: 1px 6px; font-size: 10px; min-width: 18px; }
   .card-flip { padding: 20px 16px; min-height: 160px; max-width: 100%; box-sizing: border-box; overflow: hidden; word-break: break-word; }
@@ -262,7 +263,7 @@ body {
   <span class="logo">习概复习</span>
   <select id="user-select"></select>
   <span class="spacer"></span>
-  <span class="sync-status" id="sync-status" onclick="toggleSync()" title="跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">同步</span></span>
+  <span class="sync-status" id="sync-status" onclick="showSyncModal()" title="跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">同步</span></span>
   <span class="stat" id="stat-time">⏱ 0分钟</span>
   <span class="badge" id="wrong-badge" style="display:none">0</span>
   <button id="btn-dark" title="暗色模式">🌙</button>
