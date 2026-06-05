@@ -1325,7 +1325,7 @@ function renderSlide() {
     c.innerHTML = '<div style="padding:60px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%">' +
       '<div class="slide-content" style="color:#2ecc71;font-size:32px">本轮速览完成！</div>' +
       '<p style="color:#888;margin:12px 0">共复习 ' + state.slideItems.length + ' 题</p>' +
-      '<div class="slide-controls" style="position:static;margin-top:24px"><button onclick="startSlides()">再来一轮</button></div></div>';
+      '<div class="slide-controls" style="position:static;margin-top:24px"><button onclick="startSlides()">再来一轮</button><button onclick="switchView(\'outline\')">返回</button></div></div>';
     return;
   }
   var item = state.slideItems[si];
