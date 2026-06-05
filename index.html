@@ -191,6 +191,13 @@ body {
   background: transparent; color: var(--primary); font-size: 14px; font-weight: 600; cursor: pointer;
 }
 
+
+/* Eye Protection Mode */
+body.eye-protection { filter: sepia(0.15) brightness(1.02); }
+body.eye-protection::after {
+  content: ''; position: fixed; inset: 0; background: rgba(255, 243, 224, 0.12);
+  pointer-events: none; z-index: 9999;
+}
 @media print {
   body { background: #fff; }
   .topbar, .bottom-nav, .no-print, button, .q-actions, .quiz-top, .progress-bar { display: none !important; }
@@ -266,6 +273,7 @@ body {
   <span class="sync-status" id="sync-status" onclick="showSyncModal()" title="跨设备同步"><span class="dot" id="sync-dot"></span><span id="sync-label">同步</span></span>
   <span class="stat" id="stat-time">⏱ 0分钟</span>
   <span class="badge" id="wrong-badge" style="display:none">0</span>
+  <button id="btn-eye" title="护眼模式" onclick="toggleEyeProtection()">👁</button>
   <button id="btn-dark" title="暗色模式">🌙</button>
 </nav>
 
@@ -687,6 +695,20 @@ document.getElementById('bottom-nav').addEventListener('click', function(e) {
   var btn = e.target.closest('button');
   if (btn && btn.dataset.view) switchView(btn.dataset.view);
 });
+
+// ====== EYE PROTECTION ======
+function toggleEyeProtection() {
+  document.body.classList.toggle('eye-protection');
+  var enabled = document.body.classList.contains('eye-protection');
+  localStorage.setItem('_eyeProtection', enabled ? '1' : '0');
+  document.getElementById('btn-eye').textContent = enabled ? '👁‍🗨' : '👁';
+}
+(function() {
+  if (localStorage.getItem('_eyeProtection') === '1') {
+    document.body.classList.add('eye-protection');
+    document.getElementById('btn-eye').textContent = '👁‍🗨';
+  }
+})();
 
 // ====== DARK MODE ======
 document.getElementById('btn-dark').addEventListener('click', function() {
