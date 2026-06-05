@@ -1,882 +1,1193 @@
 {
   "meta": {
     "subject": "习近平新时代中国特色社会主义思想概论",
-    "version": "3.0",
-    "totalSlides": 97
+    "version": "4.0",
+    "totalSlides": 123
   },
   "items": [
     {
-      "id": "slide_001",
-      "question": "习近平新时代中国特色社会主义思想的创立背景包括时代背景、实践基础和___",
-      "answer": "理论渊源",
+      "id": "s1_001",
+      "question": "习近平新时代中国特色社会主义思想是坚持“___”的光辉典范。",
+      "answer": "两个结合",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_002",
-      "question": "习近平新时代中国特色社会主义思想的核心内容是___",
-      "answer": "十个明确、十四个坚持、十三个方面成就",
+      "id": "s1_002",
+      "question": "“两个结合”是我们党在探索中国特色社会主义道路中得出的规律性认识，是我们取得成功的___。",
+      "answer": "最大法宝",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_003",
-      "question": "中国特色社会主义最本质的特征是___",
+      "id": "s1_003",
+      "question": "中国特色社会主义最本质的特征是___。",
       "answer": "中国共产党领导",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_004",
-      "question": "中国特色社会主义进入新时代的主要依据是___",
-      "answer": "社会主要矛盾转化为人民日益增长的美好生活需要和不平衡不充分的发展之间的矛盾",
+      "id": "s1_004",
+      "question": "中国特色社会主义制度的最大优势是___。",
+      "answer": "中国共产党领导",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_005",
-      "question": "习近平新时代中国特色社会主义思想的历史地位：是当代中国马克思主义、___",
-      "answer": "21世纪马克思主义",
+      "id": "s1_005",
+      "question": "“十个明确”是习近平新时代中国特色社会主义思想的___。",
+      "answer": "主体内容",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_006",
-      "question": "坚持和发展中国特色社会主义的总任务是___",
-      "answer": "实现社会主义现代化和中华民族伟大复兴",
+      "id": "s1_006",
+      "question": "“十四个坚持”是习近平新时代中国特色社会主义思想的___。",
+      "answer": "重要组成部分",
       "chapter": "导论",
       "chapterId": "guide",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_007",
-      "question": "中国梦的本质是___",
+      "id": "s1_007",
+      "question": "党的二十大提出的“六个必须坚持”，是习近平新时代中国特色社会主义思想的___和方法论。",
+      "answer": "世界观",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s1_008",
+      "question": "“两个确立”是党在新时代取得的___。",
+      "answer": "重大政治成果",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s1_009",
+      "question": "习近平新时代中国特色社会主义思想是当代中国马克思主义、___马克思主义。",
+      "answer": "二十一世纪",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s1_010",
+      "question": "习近平新时代中国特色社会主义思想是___和中国精神的时代精华。",
+      "answer": "中华文化",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s1_011",
+      "question": "习近平新时代中国特色社会主义思想创立的时代背景包括五个方面，请列举其中三个。",
+      "answer": "1.世界百年未有之大变局加速演进；2.中华民族伟大复兴进入关键时期；3.中国式现代化全面推进拓展；4.科学社会主义在21世纪的中国焕发新的蓬勃生机；5.中国共产党自我革命开辟新的境界。",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "问答",
+      "difficulty": "进阶",
+      "source": "提纲"
+    },
+    {
+      "id": "s1_012",
+      "question": "“六个必须坚持”包括哪些内容？",
+      "answer": "1.必须坚持人民至上；2.必须坚持自信自立；3.必须坚持守正创新；4.必须坚持问题导向；5.必须坚持系统观念；6.必须坚持胸怀天下。",
+      "chapter": "导论",
+      "chapterId": "guide",
+      "type": "问答",
+      "difficulty": "进阶",
+      "source": "提纲"
+    },
+    {
+      "id": "s2_001",
+      "question": "新时代新征程中国共产党的中心任务，就是以___全面推进中华民族伟大复兴。",
+      "answer": "中国式现代化",
+      "chapter": "第二章",
+      "chapterId": "ch02",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s2_002",
+      "question": "实现中华民族伟大复兴的中国梦，本质是___、___、___。",
       "answer": "国家富强、民族振兴、人民幸福",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_008",
-      "question": "两个一百年奋斗目标：第一个一百年是___",
-      "answer": "到中国共产党成立100年时全面建成小康社会",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_009",
-      "question": "两个一百年奋斗目标：第二个一百年是___",
-      "answer": "到新中国成立100年时建成社会主义现代化强国",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_010",
-      "question": "中国特色社会主义事业总体布局是___",
-      "answer": "五位一体",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_011",
-      "question": "中国特色社会主义战略布局是___",
-      "answer": "四个全面",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_012",
-      "question": "如何理解新时代的内涵？",
-      "answer": "新时代是承前启后、继往开来的时代，是决胜全面建成小康社会、进而全面建设社会主义现代化强国的时代，是全体人民勠力同心实现中华民族伟大复兴的时代",
-      "chapter": "导论",
-      "chapterId": "guide",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_013",
-      "question": "中国式现代化的五个中国特色：人口规模巨大、___、物质文明和精神文明相协调、人与自然和谐共生、走和平发展道路",
-      "answer": "全体人民共同富裕",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_014",
-      "question": "中国式现代化的本质要求包括___",
-      "answer": "坚持中国共产党领导、坚持中国特色社会主义、实现高质量发展、发展全过程人民民主等",
+      "id": "s2_003",
+      "question": "中国式现代化是___领导的社会主义现代化。",
+      "answer": "中国共产党",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_015",
-      "question": "全面深化改革的总目标是___",
-      "answer": "完善和发展中国特色社会主义制度，推进国家治理体系和治理能力现代化",
+      "id": "s2_004",
+      "question": "中国式现代化是___现代化，这是中国式现代化区别于西方现代化的显著标志。",
+      "answer": "全体人民共同富裕的",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_016",
-      "question": "推进中国式现代化必须牢牢把握的五个重大原则是什么？",
-      "answer": "坚持和加强党的全面领导、坚持中国特色社会主义道路、坚持以人民为中心、坚持深化改革开放、坚持发扬斗争精神",
-      "chapter": "第二章",
-      "chapterId": "ch02",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_017",
-      "question": "中国式现代化创造了人类文明新形态，它打破了___的迷思",
-      "answer": "现代化=西方化",
+      "id": "s2_005",
+      "question": "全面建成社会主义现代化强国总的战略安排是分___走。",
+      "answer": "两",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_018",
-      "question": "中国式现代化的中国特色中，人口规模巨大的现代化意味着___",
-      "answer": "全体人民整体迈进现代化，人口规模超过现有发达国家总和",
+      "id": "s2_006",
+      "question": "从2020年到2035年基本实现社会主义现代化；从2035年到___把我国建成社会主义现代化强国。",
+      "answer": "本世纪中叶",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_019",
-      "question": "中国式现代化与西方现代化的根本区别在于___",
-      "answer": "以资本为中心 vs 以人民为中心",
+      "id": "s2_007",
+      "question": "中国式现代化的本质要求中，居于核心的是___。",
+      "answer": "坚持中国共产党领导",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_020",
-      "question": "中国式现代化需要正确处理的六个重大关系包括顶层设计与实践探索、战略与策略、___",
-      "answer": "守正与创新、效率与公平、活力与秩序、自立自强与对外开放",
+      "id": "s2_008",
+      "question": "中国梦是___、发展、合作、共赢的梦。",
+      "answer": "和平",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
     },
     {
-      "id": "slide_021",
-      "question": "什么是中国式现代化的中国特色？",
-      "answer": "中国式现代化是人口规模巨大的现代化、全体人民共同富裕的现代化、物质文明和精神文明相协调的现代化、人与自然和谐共生的现代化、走和平发展道路的现代化",
+      "id": "s2_009",
+      "question": "实现中华民族伟大复兴的中国梦必须走中国道路、弘扬___、凝聚中国力量。",
+      "answer": "中国精神",
+      "chapter": "第二章",
+      "chapterId": "ch02",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s2_010",
+      "question": "2021年7月1日，习近平庄严宣告我们实现了第___个百年奋斗目标。",
+      "answer": "一",
+      "chapter": "第二章",
+      "chapterId": "ch02",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s2_011",
+      "question": "中国式现代化的五个中国特色是什么？",
+      "answer": "1.人口规模巨大的现代化；2.全体人民共同富裕的现代化；3.物质文明和精神文明相协调的现代化；4.人与自然和谐共生的现代化；5.走和平发展道路的现代化。",
       "chapter": "第二章",
       "chapterId": "ch02",
       "type": "问答",
-      "source": "教师重点"
+      "difficulty": "进阶",
+      "source": "提纲"
     },
     {
-      "id": "slide_022",
-      "question": "新发展理念的内容是___",
-      "answer": "创新、协调、绿色、开放、共享",
+      "id": "s2_012",
+      "question": "推进中国式现代化需要牢牢把握的五个重大原则是什么？",
+      "answer": "1.坚持和加强党的全面领导；2.坚持走中国特色社会主义道路；3.坚持以人民为中心的发展思想；4.坚持深化改革开放；5.坚持发扬斗争精神。",
       "chapter": "第二章",
       "chapterId": "ch02",
-      "type": "填空",
-      "source": "教师重点"
+      "type": "问答",
+      "difficulty": "进阶",
+      "source": "提纲"
     },
     {
-      "id": "slide_023",
+      "id": "s6_001",
+      "question": "高质量发展是全面建设社会主义现代化国家的___任务。",
+      "answer": "首要",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_002",
+      "question": "创新是引领发展的___动力。",
+      "answer": "第一",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_003",
+      "question": "协调是持续健康发展的___。",
+      "answer": "内在要求",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_004",
+      "question": "共享是___的本质要求。",
+      "answer": "中国特色社会主义",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_005",
+      "question": "社会主义基本经济制度的三条内容是什么？",
+      "answer": "社会主义市场经济体制",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_006",
+      "question": "新发展格局的内容是以国内大循环为主体、___相互促进。",
+      "answer": "国内国际双循环",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_007",
+      "question": "“两个毫不动摇”是指毫不动摇巩固和发展___经济，毫不动摇鼓励、支持、引导非公有制经济发展。",
+      "answer": "公有制",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_008",
+      "question": "市场在资源配置中起___作用，更好发挥政府作用。",
+      "answer": "决定性",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_009",
+      "question": "贯彻新发展理念是新时代我国发展壮大的___。",
+      "answer": "必由之路",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_010",
+      "question": "现代化产业体系是国家经济___的重要标志。",
+      "answer": "现代化",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_011",
+      "question": "如何理解以新发展理念引领高质量发展？",
+      "answer": "1.新发展理念回答了发展的目的、动力、方式、路径等问题；2.高质量发展是创新成为第一动力、协调成为内生特点、绿色成为普遍形态、开放成为必由之路、共享成为根本目的；3.要统筹质的有效提升和量的合理增长。",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "问答",
+      "difficulty": "进阶",
+      "source": "提纲"
+    },
+    {
+      "id": "s6_012",
+      "question": "构建新发展格局需要正确把握的三个内涵是什么？",
+      "answer": "1.是把握未来发展主动权的先手棋，不是被迫之举和权宜之计；2.是开放的国内国际双循环，不是封闭的国内单循环；3.是以全国统一大市场为基础的国内大循环为主体，不是各地都搞自我小循环。",
+      "chapter": "第六章",
+      "chapterId": "ch06",
+      "type": "问答",
+      "difficulty": "进阶",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_001",
       "question": "中国特色社会主义最本质的特征是___",
       "answer": "中国共产党领导",
-      "chapter": "第三章",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_024",
+      "id": "slide_p2_002",
       "question": "中国特色社会主义制度的最大优势是___",
       "answer": "中国共产党领导",
-      "chapter": "第三章",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_025",
-      "question": "党的全面领导是___的",
-      "answer": "全面的、系统的、整体的",
-      "chapter": "第三章",
+      "id": "slide_p2_003",
+      "question": "中国最大的国情就是___，中国共产党是___",
+      "answer": "中国共产党领导、最高政治领导力量",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_026",
-      "question": "党的领导制度是我国的___制度",
-      "answer": "根本领导",
-      "chapter": "第三章",
+      "id": "slide_p2_004",
+      "question": "坚持___是最高政治原则",
+      "answer": "党中央集中统一领导",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_027",
-      "question": "坚持党的全面领导需要做到___",
-      "answer": "两个维护：维护习近平总书记核心地位、维护党中央权威和集中统一领导",
-      "chapter": "第三章",
+      "id": "slide_p2_005",
+      "question": "___制度是我国的根本领导制度",
+      "answer": "党的领导",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_028",
-      "question": "如何理解党的全面领导的内涵？",
-      "answer": "党是最高政治领导力量，党的领导是全面的、系统的、整体的，必须落实到各领域各方面各环节",
-      "chapter": "第三章",
+      "id": "slide_p2_006",
+      "question": "党的领导是全面的、系统的、整体的。在领导对象上，党领导人大、政府、___、监察机关、审判机关、检察机关、武装力量、人民团体、企事业单位、基层群众性自治组织、社会组织等",
+      "answer": "政协",
+      "chapter": "第三章 坚持党的全面领导",
+      "chapterId": "ch03",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_007",
+      "question": "如何加强党的全面领导？",
+      "answer": "①坚持和加强党的全面领导，使党的领导核心作用充分彰显；②坚持和加强党的全面领导，使党的政治领导力、思想引领力、群众组织力、社会号召力显著增强；③坚持和加强党的全面领导，为推进新时代中国特色社会主义事业提供了政治保证",
+      "chapter": "第三章 坚持党的全面领导",
       "chapterId": "ch03",
       "type": "问答",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_029",
-      "question": "人民立场是中国共产党的根本___立场",
-      "answer": "政治",
-      "chapter": "第四章",
+      "id": "slide_p2_008",
+      "question": "人民性是马克思主义的本质属性和鲜明品格，___是新时代坚持和发展中国特色社会主义的根本立场",
+      "answer": "坚持以人民为中心",
+      "chapter": "第四章 坚持以人民为中心",
       "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_030",
-      "question": "党的根本宗旨是___",
-      "answer": "全心全意为人民服务",
-      "chapter": "第四章",
+      "id": "slide_p2_009",
+      "question": "___是中国共产党的根本政治立场，是马克思主义政党区别于其他政党的显著标志",
+      "answer": "人民立场",
+      "chapter": "第四章 坚持以人民为中心",
       "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_031",
-      "question": "群众路线的核心内容是___",
-      "answer": "一切为了群众，一切依靠群众，从群众中来，到群众中去",
-      "chapter": "第四章",
+      "id": "slide_p2_010",
+      "question": "___是最大的政治，决定事业兴衰成败",
+      "answer": "民心",
+      "chapter": "第四章 坚持以人民为中心",
       "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_032",
-      "question": "共同富裕是___的富裕",
-      "answer": "全体人民",
-      "chapter": "第四章",
+      "id": "slide_p2_011",
+      "question": "___是新时代党治国理政的根本价值取向",
+      "answer": "坚持人民至上",
+      "chapter": "第四章 坚持以人民为中心",
       "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_033",
-      "question": "如何理解人民江山论？",
-      "answer": "江山就是人民，人民就是江山。中国共产党领导人民打江山、守江山，守的是人民的心",
-      "chapter": "第四章",
-      "chapterId": "ch04",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_034",
-      "question": "推动共同富裕需要处理好___的关系",
-      "answer": "效率与公平",
-      "chapter": "第四章",
+      "id": "slide_p2_012",
+      "question": "共同富裕是___的本质要求，是___的重要特征",
+      "answer": "中国特色社会主义、中国式现代化",
+      "chapter": "第四章 坚持以人民为中心",
       "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_035",
-      "question": "全面深化改革的总目标是___",
-      "answer": "完善和发展中国特色社会主义制度，推进国家治理体系和治理能力现代化",
-      "chapter": "第五章",
-      "chapterId": "ch05",
+      "id": "slide_p2_013",
+      "question": "群众路线是我们党的___和___，是我们党永葆青春活力和战斗力的重要传家宝",
+      "answer": "生命线、根本工作路线",
+      "chapter": "第四章 坚持以人民为中心",
+      "chapterId": "ch04",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_036",
-      "question": "改革开放是决定当代中国命运的___一招",
-      "answer": "关键",
-      "chapter": "第五章",
-      "chapterId": "ch05",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_037",
-      "question": "改革开放是坚持和发展中国特色社会主义的___",
-      "answer": "必由之路",
-      "chapter": "第五章",
-      "chapterId": "ch05",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_038",
-      "question": "如何将改革开放进行到底？",
-      "answer": "坚持全面深化改革，坚持对外开放基本国策，以开放促改革、促发展，构建更高水平开放型经济新体制",
-      "chapter": "第五章",
-      "chapterId": "ch05",
+      "id": "slide_p2_014",
+      "question": "如何坚持人民立场？",
+      "answer": "①坚持人民立场，就要始终牢记党的初心和使命——为中国人民谋幸福、为中华民族谋复兴；②坚持人民立场，就要始终保持党同人民群众的血肉联系；③坚持人民立场，就要热爱人民、尊重人民、敬畏人民",
+      "chapter": "第四章 坚持以人民为中心",
+      "chapterId": "ch04",
       "type": "问答",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_039",
-      "question": "新发展阶段是___的阶段",
-      "answer": "全面建设社会主义现代化国家",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_040",
-      "question": "新发展理念的内容是___",
-      "answer": "创新、协调、绿色、开放、共享",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_041",
-      "question": "新发展格局是___",
-      "answer": "以国内大循环为主体、国内国际双循环相互促进",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_042",
-      "question": "推动高质量发展必须坚持___",
-      "answer": "质量第一、效益优先",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_043",
-      "question": "供给侧结构性改革的重点是___",
-      "answer": "去产能、去库存、去杠杆、降成本、补短板",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_044",
-      "question": "构建新发展格局的关键是___",
-      "answer": "经济循环的畅通无阻",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_045",
-      "question": "新发展阶段、新发展理念、新发展格局三者的关系是什么？",
-      "answer": "新发展阶段是起点，新发展理念是指导原则，新发展格局是路径选择",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_046",
-      "question": "建设现代化经济体系的主要内容包括___",
-      "answer": "创新引领、协同发展的产业体系等六个方面",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_047",
-      "question": "乡村振兴战略的总要求是___",
-      "answer": "产业兴旺、生态宜居、乡风文明、治理有效、生活富裕",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_048",
-      "question": "经济新常态的主要特征是___",
-      "answer": "速度换挡、结构优化、动力转换",
-      "chapter": "第六章",
-      "chapterId": "ch06",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_049",
-      "question": "教育、科技、人才三者的关系是___",
-      "answer": "三者一体化发展，相互支撑、相互促进",
-      "chapter": "第七章",
-      "chapterId": "ch07",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_050",
-      "question": "科技是第一___力",
-      "answer": "生产",
-      "chapter": "第七章",
-      "chapterId": "ch07",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_051",
-      "question": "人才是第一___源",
-      "answer": "资源",
-      "chapter": "第七章",
-      "chapterId": "ch07",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_052",
-      "question": "教育是国之大计、___大计",
-      "answer": "党",
-      "chapter": "第七章",
-      "chapterId": "ch07",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_053",
-      "question": "全过程人民民主的本质是___",
-      "answer": "社会主义民主",
-      "chapter": "第八章",
+      "id": "slide_p2_015",
+      "question": "___是社会主义的生命，___是社会主义民主政治的本质属性",
+      "answer": "人民民主、全过程人民民主",
+      "chapter": "第八章 发展全过程人民民主",
       "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_054",
-      "question": "全过程人民民主的四个相统一是___",
-      "answer": "过程民主和成果民主、程序民主和实质民主、直接民主和间接民主、人民民主和国家意志相统一",
-      "chapter": "第八章",
+      "id": "slide_p2_016",
+      "question": "___是全面建设社会主义现代化国家的内在要求和重要目标",
+      "answer": "发展社会主义民主政治",
+      "chapter": "第八章 发展全过程人民民主",
       "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_055",
-      "question": "全过程人民民主的三个全是___",
-      "answer": "全链条、全方位、全覆盖",
-      "chapter": "第八章",
-      "chapterId": "ch08",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_056",
-      "question": "全过程人民民主的三个最是___",
-      "answer": "最广泛、最真实、最管用",
-      "chapter": "第八章",
-      "chapterId": "ch08",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_057",
-      "question": "人民代表大会制度是实现我国全过程人民民主的___",
-      "answer": "重要制度载体",
-      "chapter": "第八章",
-      "chapterId": "ch08",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_058",
-      "question": "如何理解全过程人民民主是最广泛、最真实、最管用的民主？",
-      "answer": "全链条体现民主选举、协商、决策、管理、监督各环节；全方位覆盖国家政治生活；全覆盖保障人民当家作主权利",
-      "chapter": "第八章",
-      "chapterId": "ch08",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_059",
-      "question": "全面推进依法治国的总抓手是___",
-      "answer": "中国特色社会主义法治体系",
-      "chapter": "第九章",
-      "chapterId": "ch09",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_060",
-      "question": "中国特色社会主义法治体系包括___",
-      "answer": "完备的法律规范体系、高效的法治实施体系、严密的法治监督体系、有力的法治保障体系、完善的党内法规体系",
-      "chapter": "第九章",
-      "chapterId": "ch09",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_061",
-      "question": "全面依法治国的基本格局是___",
-      "answer": "科学立法、严格执法、公正司法、全民守法",
-      "chapter": "第九章",
-      "chapterId": "ch09",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_062",
-      "question": "建设社会主义文化强国的关键是___",
-      "answer": "坚定文化自信",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_063",
-      "question": "社会主义核心价值观的三个层面是___",
-      "answer": "国家层面：富强民主文明和谐；社会层面：自由平等公正法治；个人层面：爱国敬业诚信友善",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_064",
-      "question": "如何铸就社会主义文化新辉煌？",
-      "answer": "坚持马克思主义在意识形态领域的指导地位，坚定文化自信，推动中华优秀传统文化创造性转化和创新性发展",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_065",
-      "question": "中华优秀传统文化的创造性转化是指___",
-      "answer": "按照时代特点和要求，对传统文化中有借鉴价值的内涵和陈旧的表现形式加以改造",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_066",
-      "question": "意识形态工作是___的极端重要的工作",
-      "answer": "为国家立心、为民族立魂",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_067",
-      "question": "文化自信是更基础、更广泛、更___的自信",
-      "answer": "深厚",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_068",
-      "question": "如何建设社会主义文化强国？",
-      "answer": "坚持马克思主义指导，坚定文化自信，推动文化事业和文化产业发展，提升国家文化软实力和中华文化影响力",
-      "chapter": "第十章",
-      "chapterId": "ch10",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_069",
-      "question": "社会治理格局是___",
-      "answer": "共建共治共享",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_070",
-      "question": "社会建设的重点是___",
-      "answer": "保障和改善民生",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_071",
-      "question": "保障和改善民生的重点领域包括___",
-      "answer": "教育、医疗、养老、住房等人民群众最关心的领域",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_072",
-      "question": "加强和创新社会治理需要___",
-      "answer": "完善社会治理体系，健全共建共治共享的社会治理制度",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_073",
-      "question": "共同富裕取得更为明显的实质性进展需要___",
-      "answer": "坚持尽力而为、量力而行，提升公共服务水平，兜住困难群众基本生活底线",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_074",
-      "question": "如何理解共建共治共享的社会治理体系？",
-      "answer": "共建是共同建设，共治是共同治理，共享是共同享有成果，三者统一于社会治理实践",
-      "chapter": "第十一章",
-      "chapterId": "ch11",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_075",
-      "question": "习近平生态文明思想的第一个核心观点是___",
-      "answer": "人与自然和谐共生",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_076",
-      "question": "习近平生态文明思想的第二个核心观点是___",
-      "answer": "绿水青山就是金山银山",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_077",
-      "question": "绿水青山就是金山银山的三句话：绿水青山就是金山银山、___",
-      "answer": "保护生态环境就是保护生产力、改善生态环境就是发展生产力",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_078",
-      "question": "生态文明建设的方针是___",
-      "answer": "节约优先、保护优先、自然恢复为主",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_079",
-      "question": "生态文明制度体系包括___",
-      "answer": "自然资源资产产权制度、国土空间开发保护制度、生态补偿制度等",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_080",
-      "question": "如何理解人与自然和谐共生？",
-      "answer": "人与自然是生命共同体，人类必须尊重自然、顺应自然、保护自然，走生产发展、生活富裕、生态良好的文明发展道路",
-      "chapter": "第十二章",
-      "chapterId": "ch12",
-      "type": "问答",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_081",
-      "question": "总体国家安全观的核心是___",
-      "answer": "以人民安全为宗旨，以政治安全为根本",
-      "chapter": "第十三章",
-      "chapterId": "ch13",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_082",
-      "question": "国家安全体系涵盖___个重点领域",
-      "answer": "政治、军事、国土、经济等16个重点领域",
-      "chapter": "第十三章",
-      "chapterId": "ch13",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_083",
-      "question": "建设一支听党指挥、能打胜仗、___的人民军队",
-      "answer": "作风优良",
-      "chapter": "第十四章",
-      "chapterId": "ch14",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_084",
-      "question": "党在新时代的强军目标是___",
-      "answer": "建设世界一流军队",
-      "chapter": "第十四章",
-      "chapterId": "ch14",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_085",
-      "question": "一国两制的核心要义是___",
-      "answer": "坚持一个中国原则，坚持港人治港、澳人治澳、高度自治",
-      "chapter": "第十五章",
-      "chapterId": "ch15",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_086",
-      "question": "解决台湾问题的基本方针是___",
-      "answer": "和平统一、一国两制",
-      "chapter": "第十五章",
-      "chapterId": "ch15",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_087",
-      "question": "中国特色大国外交的目标是___",
-      "answer": "推动构建人类命运共同体",
-      "chapter": "第十六章",
-      "chapterId": "ch16",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_088",
-      "question": "人类命运共同体的内涵包括___",
-      "answer": "持久和平、普遍安全、共同繁荣、开放包容、清洁美丽",
-      "chapter": "第十六章",
-      "chapterId": "ch16",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_089",
-      "question": "新时代党的建设总要求以___为主线",
-      "answer": "加强党的长期执政能力建设、先进性和纯洁性建设",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
-      "type": "填空",
-      "source": "教师重点"
-    },
-    {
-      "id": "slide_090",
-      "question": "党的政治建设是党的___性建设",
+      "id": "slide_p2_017",
+      "question": "人民代表大会制度是我国的___政治制度",
       "answer": "根本",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_091",
-      "question": "党的思想建设是党的___性建设",
-      "answer": "基础",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_018",
+      "question": "基层群众自治制度是___建设的基础",
+      "answer": "社会主义民主政治",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_092",
-      "question": "全面从严治党必须以党的___建设为统领",
-      "answer": "政治",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_019",
+      "question": "统一战线是凝聚人心、___的强大法宝",
+      "answer": "汇聚力量",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_093",
-      "question": "党的自我革命的核心内涵是___",
-      "answer": "自我净化、自我完善、自我革新、自我提高",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_020",
+      "question": "协商民主是实践___的重要形式",
+      "answer": "全过程人民民主",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_094",
-      "question": "为什么说党的自我革命能跳出历史周期率？",
-      "answer": "通过自我革命，党能够不断发现和解决自身存在的问题，保持先进性和纯洁性，避免人亡政息的历史周期率",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_021",
+      "question": "如何走中国特色社会主义政治发展道路？",
+      "answer": "①必须坚持党的领导、人民当家作主、依法治国有机统一；②必须积极稳妥推进政治体制改革；③必须始终保持政治定力",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
       "type": "问答",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_095",
-      "question": "新时代党的建设七个方面总体布局包括___",
-      "answer": "政治建设、思想建设、组织建设、作风建设、纪律建设、制度建设、反腐败斗争",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_022",
+      "question": "文化自信是更基础、更广泛、更深厚的自信，是一个国家、一个民族发展中最基本、最深沉、最___的力量",
+      "answer": "持久",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_096",
-      "question": "党的二十大提出的三个务必是___",
-      "answer": "务必不忘初心、牢记使命，务必谦虚谨慎、艰苦奋斗，务必敢于斗争、善于斗争",
-      "chapter": "第十七章",
-      "chapterId": "ch17",
+      "id": "slide_p2_023",
+      "question": "建设社会主义文化强国、推动社会主义文化繁荣兴盛，关键在于坚定___",
+      "answer": "中国特色社会主义文化自信",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
       "type": "填空",
-      "source": "教师重点"
+      "source": "提纲"
     },
     {
-      "id": "slide_097",
-      "question": "反腐败斗争的方针是___",
-      "answer": "不敢腐、不能腐、不想腐一体推进",
-      "chapter": "第十七章",
+      "id": "slide_p2_024",
+      "question": "___是推动社会主义文化繁荣兴盛的唯一正确道路",
+      "answer": "坚持中国特色社会主义文化发展道路",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_025",
+      "question": "马克思主义是我们立党立国、___的根本指导思想",
+      "answer": "兴党兴国",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_026",
+      "question": "___是文化的生命所在，是文化的本质特征",
+      "answer": "创新创造",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_027",
+      "question": "中华文明的突出特性包括连续性、创新性、统一性、___、和平性",
+      "answer": "包容性",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_028",
+      "question": "如何铸就社会主义文化新辉煌？",
+      "answer": "①传承发展中华优秀传统文化，推动中华优秀传统文化创造性转化、创新性发展；②繁荣发展文化事业和文化产业；③不断提升国家文化软实力和中华文化影响力",
+      "chapter": "第十章 建设社会主义文化强国",
+      "chapterId": "ch10",
+      "type": "问答",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_029",
+      "question": "___是发展的根本目的",
+      "answer": "增进民生福祉",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_030",
+      "question": "收入分配是___之源，是改善民生、实现发展成果由人民共享最重要最直接的方式",
+      "answer": "民生",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_031",
+      "question": "就业是最___的民生",
+      "answer": "基本",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_032",
+      "question": "人民健康是社会主义现代化的重要___",
+      "answer": "标志",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_033",
+      "question": "基层治理是___的基石，城乡社区是社会治理最基本的单元",
+      "answer": "国家治理",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_034",
+      "question": "健全和完善___是新时代加强社会建设的重要着力点",
+      "answer": "社会保障体系",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_035",
+      "question": "如何坚持在发展中增进民生福祉？",
+      "answer": "①重要前提——正确把握民生和发展的关系；②工作思路——坚守底线、突出重点、完善制度、引导预期；③重中之重——解决人民群众最关心最直接最现实的利益问题；④重要方针——坚持尽力而为、量力而行；⑤重要原则——坚持人人尽责、人人享有",
+      "chapter": "第十一章 以保障和改善民生为重点加强社会建设",
+      "chapterId": "ch11",
+      "type": "问答",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_036",
+      "question": "生态文明建设是关系___永续发展的根本大计",
+      "answer": "中华民族",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_037",
+      "question": "___就是金山银山",
+      "answer": "绿水青山",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_038",
+      "question": "___是全面建设社会主义现代化国家的重要目标，也是满足人民日益增长的优美生态环境需要的必然要求",
+      "answer": "建设美丽中国",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_039",
+      "question": "保护生态环境必须依靠___、依靠___",
+      "answer": "制度、法治",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_040",
+      "question": "中国是全球生态文明建设的重要___、___、___",
+      "answer": "参与者、贡献者、引领者",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_041",
+      "question": "中国力争___年前实现碳达峰，___年前实现碳中和",
+      "answer": "2030、2060",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_042",
+      "question": "如何加快形成绿色生产方式和生活方式？",
+      "answer": "①加快推动产业结构、能源结构、交通运输结构等调整优化；②推进各类资源节约集约利用；③积极稳妥推进碳达峰碳中和；④健全绿色发展的保障体系；⑤坚持把建设美丽中国转化为全体人民自觉行动",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "问答",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_043",
+      "question": "如何处理「绿水青山」和「金山银山」的关系？",
+      "answer": "①从根本上讲，二者是辩证统一、相辅相成的关系；②绿水青山既是自然财富、生态财富，又是社会财富、经济财富；③处理好两者的关系，关键在人，关键在思路",
+      "chapter": "第十二章 建设社会主义生态文明",
+      "chapterId": "ch12",
+      "type": "问答",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_044",
+      "question": "党的领导制度体系主要涵盖六个方面的制度，其中___是这一制度体系的主体内容，___是这一制度体系的价值追求",
+      "answer": "健全党的全面领导制度、健全为人民执政靠人民执政各项制度",
+      "chapter": "第三章 坚持党的全面领导",
+      "chapterId": "ch03",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_045",
+      "question": "全过程人民民主实现了哪四个统一？",
+      "answer": "①过程民主和成果民主的统一；②程序民主和实质民主的统一；③直接民主和间接民主的统一；④人民民主和国家意志的统一",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
+      "type": "问答",
+      "source": "提纲"
+    },
+    {
+      "id": "slide_p2_046",
+      "question": "全过程人民民主是全链条、全方位、全覆盖的民主。全链条包括民主选举、民主协商、民主决策、___、___",
+      "answer": "民主管理、民主监督",
+      "chapter": "第八章 发展全过程人民民主",
+      "chapterId": "ch08",
+      "type": "填空",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_001",
+      "question": "改革开放是决定当代中国命运的___，也是决定实现“两个一百年”奋斗目标、实现中华民族伟大复兴的关键一招。",
+      "answer": "关键一招",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_002",
+      "question": "全面深化改革总目标是：完善和发展中国特色社会主义制度、推进___现代化。",
+      "answer": "国家治理体系和治理能力",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_003",
+      "question": "“完善和发展中国特色社会主义制度”，规定了改革的___。",
+      "answer": "根本方向",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_004",
+      "question": "全面深化改革开放的正确方向中，“三个进一步解放”是指：进一步解放思想、进一步解放和发展社会生产力、进一步___。",
+      "answer": "解放和增强社会活力",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_005",
+      "question": "___是改革开放的鲜明特征和首要任务。",
+      "answer": "解放和发展社会生产力",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_006",
+      "question": "全面深化改革开放要坚持正确方法论：增强全面深化改革的系统性、整体性、协同性；加强顶层设计和___相结合；统筹改革发展稳定；胆子要大，步子要稳；坚持重大改革于法有据。",
+      "answer": "摸着石头过河",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_007",
+      "question": "统筹推进各领域各方面改革开放，必须以全面深化改革总目标为引领，以___为主线，以经济体制改革为重点，以重要领域和关键环节改革为突破口。",
+      "answer": "制度建设",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_008",
+      "question": "改革、发展、稳定是我国社会主义现代化建设的三个重要支点。其中，___是经济社会发展的强大动力，发展是解决一切经济社会问题的关键，稳定是改革发展的前提。",
+      "answer": "改革",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_009",
+      "question": "改革开放永无止境的三个原因：一是改革开放永无止境是___的深刻反映；二是改革开放永无止境是总结世界社会主义实践经验得出的重要结论；三是改革开放永无止境是推进党和人民事业发展的必然要求。",
+      "answer": "社会基本矛盾运动规律",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_010",
+      "question": "为什么说新时代全面深化改革开放是一场深刻革命？请从三个方面作答。",
+      "answer": "（1）全面深化改革开放是涉险滩、闯难关的变革。新时代的改革开放既深刻又复杂，各领域改革紧密联系、相互交融，任何一个领域的改革都会牵动其他领域。\n（2）全面深化改革开放是在多年改革开放基础上的深化，是一场全面、系统、整体的制度创新。必须着眼改革的关联性、系统性、可行性，全面系统整体推进各方面改革。\n（3）新时代的改革开放是全方位、深层次、根本性的，取得的成就是历史性、革命性、开创性的。没有哪个国家和政党，能有这样的政治气魄和历史担当，敢于大刀阔斧、刀刃向内。",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "设问",
+      "difficulty": "中等",
+      "source": "课后题详解"
+    },
+    {
+      "id": "s3_011",
+      "question": "如何理解全面深化改革总目标？",
+      "answer": "全面深化改革总目标是：完善和发展中国特色社会主义制度、推进国家治理体系和治理能力现代化。这一总目标是一个内涵丰富的有机整体，两句话都讲，才是完整的、全面的。\n（1）“完善和发展中国特色社会主义制度”，规定了改革的根本方向，就是无论改什么、怎么改，都要坚持中国共产党领导、坚持中国特色社会主义。\n（2）“推进国家治理体系和治理能力现代化”，明确了改革的鲜明指向和时代要求，就是要通过改革进一步增强我国制度活力，把制度优势转化为国家治理效能。\n（3）这一总目标的提出，标志着我们党对社会主义建设规律和改革开放规律认识的深化。",
+      "chapter": "第五章 全面深化改革开放",
+      "chapterId": "ch05",
+      "type": "设问",
+      "difficulty": "中等",
+      "source": "课后题详解"
+    },
+    {
+      "id": "s3_012",
+      "question": "全面从严治党，核心是___，基础在全面，关键在严，要害在治。",
+      "answer": "加强党的领导",
+      "chapter": "第十七章 全面从严治党",
       "chapterId": "ch17",
       "type": "填空",
-      "source": "教师重点"
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_013",
+      "question": "全面从严治党是党永葆生机活力、走好新的赶考之路的___，是新时代党的建设的鲜明主题。",
+      "answer": "必由之路",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_014",
+      "question": "___是党的根本性建设，要摆在首位。",
+      "answer": "党的政治建设",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_015",
+      "question": "保证全党服从中央，维护党中央权威和集中统一领导，是党的政治建设的___。",
+      "answer": "首要任务",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_016",
+      "question": "经过不懈努力，党找到了___这一跳出治乱兴衰历史周期率的第二个答案。",
+      "answer": "自我革命",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_017",
+      "question": "勇于自我革命是中国共产党区别于其他政党的___，也是我们党最大的优势、最鲜明的品格。",
+      "answer": "显著标志",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_018",
+      "question": "自我革命的“四个自我”是指：自我净化、自我完善、___、自我提高。",
+      "answer": "自我革新",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_019",
+      "question": "坚持___、___、___一体推进，不敢腐、不能腐、不想腐是相互依存、相互促进的有机整体。",
+      "answer": "不敢腐、不能腐、不想腐",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_020",
+      "question": "全党同志“三个务必”是：务必不忘初心、牢记使命，务必___，务必敢于斗争、善于斗争。",
+      "answer": "谦虚谨慎、艰苦奋斗",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_021",
+      "question": "坚持和加强党的全面领导，坚持党要管党、全面从严治党，以___为主线。",
+      "answer": "加强党的长期执政能力建设、先进性和纯洁性建设",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "23版题库"
+    },
+    {
+      "id": "s3_022",
+      "question": "坚持和加强党的全面领导，坚持党要管党、全面从严治党，以___为着力点。",
+      "answer": "调动全党积极性、主动性、创造性",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "中等",
+      "source": "23版题库"
+    },
+    {
+      "id": "s3_023",
+      "question": "腐败是危害党的生命力和战斗力的___，是党长期执政面临的最大威胁。",
+      "answer": "最大毒瘤",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s3_024",
+      "question": "新时代党的建设的根本方针是___。",
+      "answer": "坚持党要管党、全面从严治党",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "大题库"
+    },
+    {
+      "id": "s3_025",
+      "question": "如何理解以伟大自我革命引领伟大社会革命？",
+      "answer": "（1）中国共产党的不懈奋斗史，就是一部伟大自我革命和伟大社会革命相互促进的历史。伟大社会革命锻造和成就伟大的党，伟大自我革命保障和推动伟大的事业。\n（2）以伟大自我革命引领伟大社会革命是新时代中国特色社会主义发展的显著特点。没有全面从严治党这场深刻的自我革命，就不可能有党和国家今天这样的大好局面。\n（3）党的伟大事业是一代一代接续推进的，党的自我革命永远在路上。必须把全面从严治党作为长期战略、永恒课题，把党的伟大自我革命进行到底。",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "设问",
+      "difficulty": "中等",
+      "source": "课后题详解"
+    },
+    {
+      "id": "s3_026",
+      "question": "简述新时代党的建设总要求的主要内容。",
+      "answer": "新时代党的建设总要求是：坚持和加强党的全面领导，坚持党要管党、全面从严治党，以加强党的长期执政能力建设、先进性和纯洁性建设为主线，以党的政治建设为统领，以坚定理想信念宗旨为根基，以调动全党积极性、主动性、创造性为着力点，全面推进党的政治建设、思想建设、组织建设、作风建设、纪律建设，把制度建设贯穿其中，深入推进反腐败斗争，不断提高党的建设质量，把党建设成为始终走在时代前列、人民衷心拥护、勇于自我革命、经得起各种风浪考验、朝气蓬勃的马克思主义执政党。",
+      "chapter": "第十七章 全面从严治党",
+      "chapterId": "ch17",
+      "type": "设问",
+      "difficulty": "中等",
+      "source": "课后题详解"
+    },
+    {
+      "id": "s4_001",
+      "question": "教育、科技、人才是全面建设社会主义现代化国家的___、___支撑。",
+      "answer": "基础性、战略性",
+      "chapter": "第七章 社会主义现代化建设的教育科技人才战略",
+      "chapterId": "ch07",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_002",
+      "question": "必须坚持科技是第一___、人才是第一___、创新是第一___。",
+      "answer": "生产力、资源、动力",
+      "chapter": "第七章 社会主义现代化建设的教育科技人才战略",
+      "chapterId": "ch07",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_003",
+      "question": "教育是民族振兴、社会进步的___。全面建设社会主义现代化国家，教育是___，科技是___，人才是___。",
+      "answer": "基石；根本、关键、基础",
+      "chapter": "第七章 社会主义现代化建设的教育科技人才战略",
+      "chapterId": "ch07",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_004",
+      "question": "全面依法治国是坚持和发展中国特色社会主义的___和___。",
+      "answer": "本质要求、重要保障",
+      "chapter": "第九章 全面依法治国",
+      "chapterId": "ch09",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_005",
+      "question": "全面推进依法治国的总抓手是建设中国特色社会主义___。",
+      "answer": "法治体系",
+      "chapter": "第九章 全面依法治国",
+      "chapterId": "ch09",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_006",
+      "question": "法治国家、法治政府、法治社会三者相互联系、内在统一，是法治中国建设的___。",
+      "answer": "三大支柱",
+      "chapter": "第九章 全面依法治国",
+      "chapterId": "ch09",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_007",
+      "question": "总体国家安全观以___安全为宗旨，以___安全为根本，以___安全为基础。",
+      "answer": "人民、政治、经济",
+      "chapter": "第十三章 维护和塑造国家安全",
+      "chapterId": "ch13",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_008",
+      "question": "国家安全是民族复兴的___，社会稳定是国家强盛的前提。",
+      "answer": "根基",
+      "chapter": "第十三章 维护和塑造国家安全",
+      "chapterId": "ch13",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_009",
+      "question": "党在新时代的强军目标是建设一支___、___、___的人民军队。",
+      "answer": "听党指挥、能打胜仗、作风优良",
+      "chapter": "第十四章 建设巩固国防和强大人民军队",
+      "chapterId": "ch14",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_010",
+      "question": "在强军目标中，听党指挥是___，能打胜仗是___，作风优良是___。",
+      "answer": "灵魂、核心、保证",
+      "chapter": "第十四章 建设巩固国防和强大人民军队",
+      "chapterId": "ch14",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_011",
+      "question": "“一国两制”是党领导人民实现祖国和平统一的一项___，是国家一项基本___。",
+      "answer": "重要制度、国策",
+      "chapter": "第十五章 坚持一国两制和推进祖国完全统一",
+      "chapterId": "ch15",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_012",
+      "question": "“一国”是实施“两制”的___和___，“两制”从属和派生于“一国”。",
+      "answer": "前提、基础",
+      "chapter": "第十五章 坚持一国两制和推进祖国完全统一",
+      "chapterId": "ch15",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_013",
+      "question": "中国特色大国外交要服务___、促进___，推动建设新型国际关系，推动构建人类命运共同体。",
+      "answer": "民族复兴、人类进步",
+      "chapter": "第十六章 中国特色大国外交和推动构建人类命运共同体",
+      "chapterId": "ch16",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_014",
+      "question": "推动构建新型国际关系，就是要秉持相互尊重、___、___原则。",
+      "answer": "公平正义、合作共赢",
+      "chapter": "第十六章 中国特色大国外交和推动构建人类命运共同体",
+      "chapterId": "ch16",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
+    },
+    {
+      "id": "s4_015",
+      "question": "共建“一带一路”秉持___原则，坚持开放、绿色、廉洁理念。",
+      "answer": "共商共建共享",
+      "chapter": "第十六章 中国特色大国外交和推动构建人类命运共同体",
+      "chapterId": "ch16",
+      "type": "填空",
+      "difficulty": "基础",
+      "source": "提纲"
     }
   ]
 }
