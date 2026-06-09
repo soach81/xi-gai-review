@@ -29,13 +29,13 @@ canvas { box-shadow: 0 2px 8px rgba(0,0,0,0.1); max-width: 100%; }
   <button onclick="zoomOut()" title="缩小">−</button>
   <button onclick="zoomReset()" title="重置">1x</button>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script>
 var pdfDoc = null, scale = 1.5, baseScale = 1.5;
 var viewer = document.getElementById('viewer');
 var loading = document.getElementById('loading');
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.bootcdn.net/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 function renderAllPages() {
   if (!pdfDoc) return;
