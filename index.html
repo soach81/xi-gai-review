@@ -335,7 +335,7 @@ body.eye-protection::after {
   <button data-view="settings"><span class="ico">⚙</span>设置</button>
 </nav>
 
-<script src="data/questions.js"></script>
+<script src="data/questions.js?t=1718480000"></script>
 <script>
 'use strict';
 
@@ -393,7 +393,7 @@ function init() {
     updateBadge();
   }
   // Then try fetch for latest JSON (async update)
-  fetch('data/questions.json').then(function(r) { return r.json(); }).then(function(d) {
+  fetch('data/questions.json?t=1718480000').then(function(r) { return r.json(); }).then(function(d) {
     questionData = d;
     updateBadge();
   }).catch(function() {
@@ -402,20 +402,20 @@ function init() {
     }
   });
   // Load essay questions
-  fetch('data/essay_questions.json').then(function(r) { return r.json(); }).then(function(d) {
+  fetch('data/essay_questions.json?v=3').then(function(r) { return r.json(); }).then(function(d) {
     essayData = d;
   }).catch(function() {
     // Retry once after 2 seconds
     setTimeout(function() {
-      fetch('data/essay_questions.json').then(function(r) { return r.json(); }).then(function(d) { essayData = d; }).catch(function() {});
+      fetch('data/essay_questions.json?v=3').then(function(r) { return r.json(); }).then(function(d) { essayData = d; }).catch(function() {});
     }, 2000);
   });
   // Load flashcards
-  fetch('data/flashcards.json').then(function(r) { return r.json(); }).then(function(d) {
+  fetch('data/flashcards.json?v=3').then(function(r) { return r.json(); }).then(function(d) {
     flashcardData = d;
   }).catch(function() {});
   // Load slides
-  fetch('data/slides.json').then(function(r) { return r.json(); }).then(function(d) {
+  fetch('data/slides.json?v=3').then(function(r) { return r.json(); }).then(function(d) {
     slidesData = d;
   }).catch(function() {});
 }
@@ -874,9 +874,11 @@ function renderQuizQuestion(reviewState) {
   var qs = state.quizQuestions, i = state.quizIndex, isR = !!reviewState;
   var c = document.getElementById('view-quiz');
   if (i >= qs.length) {
-    var pct = state.quizTotal ? Math.round(state.quizScore/state.quizTotal*100) : 0;
+    var histTotal = quizHistory.length;
+    var histCorrect = quizHistory.filter(function(h) { return h.isCorrect; }).length;
+    var pct = histTotal ? Math.round(histCorrect/histTotal*100) : 0;
     var warn = pct < 60 ? '<div class="warn-msg">⚠️ 正确率偏低，建议重读提纲后再刷</div>' : '';
-    c.innerHTML = '<div class="quiz-result"><h2>本轮完成</h2><div class="score">' + pct + '%</div><div class="stat-line">正确 ' + state.quizScore + ' / ' + state.quizTotal + ' 题</div>' + warn + '</div><div id="quiz-wrong-review" style="margin-top:20px"></div><div style="margin-top:20px;display:flex;gap:10px;justify-content:center"><button onclick="state.quizIndex=0;state.quizScore=0;state.quizTotal=0;quizHistory=[];renderQuizQuestion()" style="padding:10px 20px;border:1px solid var(--border);border-radius:20px;cursor:pointer">重做本轮</button><button onclick="state.quizQuestions=[];initQuizView()" style="padding:10px 20px;border:1px solid var(--border);border-radius:20px;cursor:pointer">换章节</button></div>';
+    c.innerHTML = '<div class="quiz-result"><h2>本轮完成</h2><div class="score">' + pct + '%</div><div class="stat-line">正确 ' + histCorrect + ' / ' + histTotal + ' 题</div>' + warn + '</div><div id="quiz-wrong-review" style="margin-top:20px"></div><div style="margin-top:20px;display:flex;gap:10px;justify-content:center"><button onclick="state.quizIndex=0;state.quizScore=0;state.quizTotal=0;quizHistory=[];renderQuizQuestion()" style="padding:10px 20px;border:1px solid var(--border);border-radius:20px;cursor:pointer">重做本轮</button><button onclick="state.quizQuestions=[];initQuizView()" style="padding:10px 20px;border:1px solid var(--border);border-radius:20px;cursor:pointer">换章节</button></div>';
     renderQuizWrongReview();
     return;
   }
@@ -886,17 +888,20 @@ function renderQuizQuestion(reviewState) {
   h += '<div class="quiz-card"><div class="q-header"><span>' + (q.type==='single'?'单选题':'多选题') + ' ' + '★'.repeat(q.priority||1) + '</span>' + (isR?'<span style="font-size:11px;color:var(--text2);background:var(--hover);padding:2px 8px;border-radius:10px">📋 查看历史</span>':'') + '</div>';
   h += '<div class="q-text">' + esc(q.question) + (isR||q.type==='single'?'':'<div style="font-size:12px;color:var(--warn)">可多选，选择后点确认</div>') + '</div>';
   h += '<div id="quiz-options">';
+  var blankLabels = null;
+  if (q.blankMap) { blankLabels = {}; q.blankMap.forEach(function(optIdx, bi) { blankLabels[optIdx] = '①②③④⑤⑥'[bi]; }); }
   for (var j = 0; j < q.options.length; j++) {
     var cls = '', clk = q.type === 'multi' ? 'toggleQuizOpt(' + j + ')' : 'answerQuiz(' + j + ')';
     if (isR) { clk = ''; if (q.answer.indexOf(j) >= 0) cls = ' correct'; else if (reviewState.type==='multi'?reviewState.selectedIdx.indexOf(j)>=0:reviewState.selectedIdx===j) cls = ' wrong'; }
-    h += '<button class="option' + cls + '" data-idx="' + j + '" onclick="' + clk + '"' + (isR?' disabled':'') + '>' + 'ABCDEFGH'[j] + '. ' + esc(q.options[j]) + '</button>';
+    var prefix = blankLabels && blankLabels[j] ? '<span style="color:#e74c3c;font-weight:bold;margin-right:4px">' + blankLabels[j] + '</span>' : '';
+    h += '<button class="option' + cls + '" data-idx="' + j + '" onclick="' + clk + '"' + (isR?' disabled':'') + '>' + prefix + 'ABCDEFGH'[j] + '. ' + esc(q.options[j]) + '</button>';
   }
   h += '</div>';
   if (!isR && q.type === 'multi') h += '<button id="quiz-confirm-btn" onclick="confirmQuizMulti()" style="width:100%;padding:10px;background:var(--gradient);color:#fff;border:none;border-radius:var(--radius);font-size:15px;cursor:pointer;margin-top:8px">确认提交</button>';
-  if (isR) h += '<div class="feedback ' + (reviewState.isCorrect?'correct-fb':'wrong-fb') + ' show">' + (reviewState.isCorrect?'✅ 当时答对了':'❌ 当时答错了') + '</div>';
+  if (isR) { h += '<div class="feedback ' + (reviewState.isCorrect?'correct-fb':'wrong-fb') + ' show">' + (reviewState.isCorrect?'✅ 当时答对了':'❌ 当时答错了') + '</div>'; if (isDisputed(q.id)) h += '<div style="margin-top:8px;padding:8px 12px;border:1px solid #e74c3c;border-radius:var(--radius);background:#fadbd8;font-size:13px">🚩 <b>有争议</b>' + (q.note ? ' — ' + esc(q.note) : '') + '</div>'; else if (q.note) h += '<div style="margin-top:8px;padding:8px 12px;border:1px solid #f39c12;border-radius:var(--radius);background:#fef9e7;font-size:13px">💡 ' + esc(q.note) + '</div>'; }
   else h += '<div class="feedback" id="quiz-fb"></div>';
   h += '<div class="q-actions">';
-  if (!isR) { h += '<button onclick="flagQuizUnsure()" id="quiz-unsure-btn" class="' + (isUnsure(q.id)?'unsure-marked':'') + '">🤔 拿不准</button> <button onclick="flagQuizDispute()" id="quiz-dispute-btn" class="' + (isDisputed(q.id)?'flag-marked':'') + '">🚩 有争议</button> '; }
+  h += '<button onclick="flagQuizUnsure()" id="quiz-unsure-btn" class="' + (isUnsure(q.id)?'unsure-marked':'') + '">🤔 拿不准</button> <button onclick="flagQuizDispute()" id="quiz-dispute-btn" class="' + (isDisputed(q.id)?'flag-marked':'') + '">🚩 有争议</button> ';
   h += '<button onclick="goNextQuiz()" style="margin-left:auto">' + (isR?'回到当前':'跳过 →') + '</button></div>';
   h += '<div style="display:flex;justify-content:center;gap:12px;margin-top:12px"><button onclick="goPrevQuiz()" style="padding:8px 20px;border:1px solid var(--border);border-radius:24px;cursor:pointer;font-size:13px"' + (quizHistory.length===0||(quizReviewMode&&quizReviewPos===0)?' disabled':'') + '>◀ 上一题</button> <span style="font-size:12px;color:var(--text2);padding:8px 6px">已答 ' + quizHistory.length + ' 题</span> <button onclick="goNextQuiz()" style="padding:8px 20px;border:1px solid var(--border);border-radius:24px;cursor:pointer;font-size:13px">下一题 ▶</button></div>';
   h += '</div>';
@@ -905,11 +910,12 @@ function renderQuizQuestion(reviewState) {
 
 function renderQuizWrongReview() {
   var el = document.getElementById('quiz-wrong-review'); if (!el) return;
-  var wb = getWrongBook();
-  var wrongQs = state.quizQuestions.filter(function(q) { return wb[q.id]; });
-  if (!wrongQs.length) { el.innerHTML = '<p style="text-align:center;color:var(--success);padding:20px;font-weight:600">🎉 全部正确！</p>'; return; }
-  el.innerHTML = '<h3 style="margin-bottom:12px;color:var(--danger)">❌ 错题回顾 (' + wrongQs.length + '题)</h3>' + wrongQs.map(function(q) {
-    var ans = q.options ? q.answer.map(function(a) { return 'ABCDEFGH'[a] + '. ' + q.options[a]; }).join('；') : q.answer.join('；');
+  // Use quizHistory to find wrong answers in THIS session
+  var wrongHistory = quizHistory.filter(function(h) { return !h.isCorrect; });
+  if (!wrongHistory.length) { el.innerHTML = '<p style="text-align:center;color:var(--success);padding:20px;font-weight:600">🎉 全部正确！</p>'; return; }
+  el.innerHTML = '<h3 style="margin-bottom:12px;color:var(--danger)">❌ 错题回顾 (' + wrongHistory.length + '题)</h3>' + wrongHistory.map(function(h) {
+    var q = state.quizQuestions[h.index]; if (!q) return '';
+    var ans = q.options ? q.answer.map(function(a, i) { var bl = q.blankMap ? '①②③④⑤⑥'[q.blankMap.indexOf(a)] : ''; return (bl ? bl + ' ' : '') + 'ABCDEFGH'[a] + '. ' + q.options[a]; }).join('；') : q.answer.join('；');
     var cnt = getWrongCount(q.id);
     return '<div class="wrong-item"><div class="wi-q">' + esc(q.question.slice(0,200)) + '</div><div class="wi-answer">✅ ' + ans + '</div><div class="wi-yours">❌ 错误 ' + cnt + ' 次' + (cnt>=2?' [顽固]':'') + '</div></div>';
   }).join('');
@@ -919,12 +925,13 @@ function toggleQuizOpt(idx) { document.querySelector('#quiz-options .option[data
 
 function answerQuiz(idx) {
   var q = state.quizQuestions[state.quizIndex], cor = q.answer, ok = cor.indexOf(idx) >= 0;
-  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: idx, isCorrect: ok, type: 'single' });
   var fb = document.getElementById('quiz-fb'), opts = document.querySelectorAll('#quiz-options .option');
   opts.forEach(function(b, j) { b.disabled = true; if (cor.indexOf(j) >= 0) b.classList.add('correct'); });
   if (ok) { fb.className = 'feedback correct-fb show'; fb.textContent = '✅ 正确！'; state.quizScore++; }
   else { fb.className = 'feedback wrong-fb show'; fb.textContent = '❌ 错误。正确答案：' + cor.map(function(a) { return 'ABCDEFGH'[a]; }).join(''); opts[idx].classList.add('wrong'); addToWrong(q.id); }
-  state.quizTotal++; updateBadge();
+  state.quizTotal++;
+  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: idx, isCorrect: ok, type: 'single' });
+  updateBadge();
   setTimeout(nextQuiz, 1200);
 }
 
@@ -933,12 +940,13 @@ function confirmQuizMulti() {
   var opts = document.querySelectorAll('#quiz-options .option'), sel = [], cor = q.answer;
   opts.forEach(function(b) { if (b.classList.contains('selected')) sel.push(parseInt(b.dataset.idx)); });
   var ok = sel.length === cor.length && sel.every(function(x) { return cor.indexOf(x) >= 0; });
-  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: sel, isCorrect: ok, type: 'multi' });
   opts.forEach(function(b, j) { b.disabled = true; if (cor.indexOf(j) >= 0) b.classList.add('correct'); if (sel.indexOf(j) >= 0 && cor.indexOf(j) < 0) b.classList.add('wrong'); });
   var cfm = document.getElementById('quiz-confirm-btn'); if (cfm) cfm.style.display = 'none';
   if (ok) { fb.className = 'feedback correct-fb show'; fb.textContent = '✅ 正确！'; state.quizScore++; }
   else { fb.className = 'feedback wrong-fb show'; fb.textContent = '❌ 错误。正确答案：' + cor.map(function(a) { return 'ABCDEFGH'[a]; }).join(''); addToWrong(q.id); }
-  state.quizTotal++; updateBadge();
+  state.quizTotal++;
+  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: sel, isCorrect: ok, type: 'multi' });
+  updateBadge();
   setTimeout(nextQuiz, 1500);
 }
 
