@@ -923,6 +923,12 @@ function renderQuizWrongReview() {
 
 function toggleQuizOpt(idx) { document.querySelector('#quiz-options .option[data-idx="' + idx + '"]').classList.toggle('selected'); }
 
+function pushHistory(idx, selectedIdx, isCorrect, type) {
+  // Remove existing entry for same question (dedup on re-answer)
+  quizHistory = quizHistory.filter(function(h) { return h.index !== idx; });
+  quizHistory.push({ index: idx, score: state.quizScore, total: state.quizTotal, selectedIdx: selectedIdx, isCorrect: isCorrect, type: type });
+}
+
 function answerQuiz(idx) {
   var q = state.quizQuestions[state.quizIndex], cor = q.answer, ok = cor.indexOf(idx) >= 0;
   var fb = document.getElementById('quiz-fb'), opts = document.querySelectorAll('#quiz-options .option');
@@ -930,7 +936,7 @@ function answerQuiz(idx) {
   if (ok) { fb.className = 'feedback correct-fb show'; fb.textContent = '✅ 正确！'; state.quizScore++; }
   else { fb.className = 'feedback wrong-fb show'; fb.textContent = '❌ 错误。正确答案：' + cor.map(function(a) { return 'ABCDEFGH'[a]; }).join(''); opts[idx].classList.add('wrong'); addToWrong(q.id); }
   state.quizTotal++;
-  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: idx, isCorrect: ok, type: 'single' });
+  pushHistory(state.quizIndex, idx, ok, 'single');
   updateBadge();
   setTimeout(nextQuiz, 1200);
 }
@@ -945,17 +951,25 @@ function confirmQuizMulti() {
   if (ok) { fb.className = 'feedback correct-fb show'; fb.textContent = '✅ 正确！'; state.quizScore++; }
   else { fb.className = 'feedback wrong-fb show'; fb.textContent = '❌ 错误。正确答案：' + cor.map(function(a) { return 'ABCDEFGH'[a]; }).join(''); addToWrong(q.id); }
   state.quizTotal++;
-  quizHistory.push({ index: state.quizIndex, score: state.quizScore, total: state.quizTotal, selectedIdx: sel, isCorrect: ok, type: 'multi' });
+  pushHistory(state.quizIndex, sel, ok, 'multi');
   updateBadge();
   setTimeout(nextQuiz, 1500);
 }
 
-function nextQuiz() { state.quizIndex++; if (state.quizIndex >= state.quizQuestions.length) { quizReviewMode = false; } renderQuizQuestion(); }
+function nextQuiz() { if (quizReviewMode) return; state.quizIndex++; if (state.quizIndex >= state.quizQuestions.length) { quizReviewMode = false; } renderQuizQuestion(); }
 
 function goPrevQuiz() {
   if (quizHistory.length === 0) return;
   if (quizReviewMode) { quizReviewPos = Math.max(0, quizReviewPos - 1); }
-  else { quizReviewPos = quizHistory.length - 1; }
+  else {
+    // Find the entry for the current question, or go to the last one
+    var curIdx = state.quizIndex;
+    quizReviewPos = quizHistory.length - 1;
+    for (var i = quizHistory.length - 1; i >= 0; i--) {
+      if (quizHistory[i].index === curIdx) { quizReviewPos = i; break; }
+      if (quizHistory[i].index < curIdx) { quizReviewPos = i; break; }
+    }
+  }
   quizReviewMode = true;
   var t = quizHistory[quizReviewPos];
   state.quizIndex = t.index; state.quizScore = t.score; state.quizTotal = t.total;
