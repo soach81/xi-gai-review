@@ -3198,7 +3198,6 @@ var __QUESTIONS__ = {
             2,
             3
           ],
-          ],
           "source": "补充题库",
           "priority": 2,
           "id": "ch05_q0873"
