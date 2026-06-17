@@ -1867,7 +1867,7 @@ var __QUESTIONS__ = {
           "type": "multi",
           "question": "中国共产党是中国特色社会主义事业的（ ）。",
           "options": [
-            "开创造",
+            "开创者",
             "推动者",
             "引领者",
             "发动者"
@@ -2791,7 +2791,7 @@ var __QUESTIONS__ = {
           "priority": 2
         },
         {
-          "type": "single",
+          "type": "multi",
           "question": "依靠人民创造历史伟业，必须尊重人民（  ）。",
           "options": [
             "斗争精神",
@@ -2800,7 +2800,8 @@ var __QUESTIONS__ = {
             "社会地位"
           ],
           "answer": [
-            1
+            1,
+            2
           ],
           "id": "ch04_q0015",
           "source": "章节练习",
