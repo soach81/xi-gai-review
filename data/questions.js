@@ -3195,7 +3195,9 @@ var __QUESTIONS__ = {
           "answer": [
             0,
             1,
-            2
+            2,
+            3
+          ],
           ],
           "source": "补充题库",
           "priority": 2,
