@@ -2123,19 +2123,73 @@ section.chapter{animation:fadeInUp 0.5s ease}
     });
   });
 
-  // Scroll tracking - highlight active chapter in TOC
+  // Scroll tracking - highlight active chapter/section in TOC
   (function() {
-    var observer = new IntersectionObserver(function(entries) {
+    // Add IDs to h3.sec-jie if missing
+    var secIdx = 0;
+    document.querySelectorAll('h3.sec-jie').forEach(function(h3) {
+      if (!h3.id) { h3.id = 'sec-' + (secIdx++); }
+    });
+
+    // Helper: scroll TOC to keep active link visible
+    function scrollTocToActive(el) {
+      if (!el) return;
+      var tocNav = document.getElementById('toc-nav');
+      var linkTop = el.offsetTop;
+      var linkH = el.offsetHeight;
+      var navScroll = tocNav.scrollTop;
+      var navH = tocNav.clientHeight;
+      if (linkTop < navScroll + 40) {
+        tocNav.scrollTop = linkTop - 40;
+      } else if (linkTop + linkH > navScroll + navH - 40) {
+        tocNav.scrollTop = linkTop + linkH - navH + 40;
+      }
+    }
+
+    // Track chapters (h2.ch-title parent = section.chapter)
+    var chObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
         if (entry.isIntersecting) {
           var id = entry.target.id;
+          var activeLink = null;
           document.querySelectorAll('#toc-links .toc-ch').forEach(function(link) {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+            var match = link.getAttribute('href') === '#' + id;
+            link.classList.toggle('active', match);
+            if (match) activeLink = link;
           });
+          // Clear section highlights when chapter changes
+          document.querySelectorAll('#toc-links .toc-sec').forEach(function(l) { l.classList.remove('active'); });
+          scrollTocToActive(activeLink);
         }
       });
-    }, {rootMargin: '-20% 0px -70% 0px'});
-    document.querySelectorAll('section.chapter').forEach(function(s) { observer.observe(s); });
+    }, {rootMargin: '-10% 0px -80% 0px'});
+    document.querySelectorAll('section.chapter').forEach(function(s) { chObserver.observe(s); });
+
+    // Track sections (h3.sec-jie)
+    var secObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var secId = entry.target.id;
+          var secText = entry.target.textContent.trim();
+          // Find matching toc-sec link
+          var activeLink = null;
+          document.querySelectorAll('#toc-links .toc-sec').forEach(function(link) {
+            var match = link.textContent.trim() === secText;
+            link.classList.toggle('active', match);
+            if (match) activeLink = link;
+          });
+          // Also highlight parent chapter
+          var parentCh = entry.target.closest('section.chapter');
+          if (parentCh) {
+            document.querySelectorAll('#toc-links .toc-ch').forEach(function(link) {
+              link.classList.toggle('active', link.getAttribute('href') === '#' + parentCh.id);
+            });
+          }
+          scrollTocToActive(activeLink);
+        }
+      });
+    }, {rootMargin: '-10% 0px -80% 0px'});
+    document.querySelectorAll('h3.sec-jie').forEach(function(h3) { secObserver.observe(h3); });
   })();
 
   // TOC toggle
