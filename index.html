@@ -363,7 +363,7 @@ var quizReviewPos = 0;
 // ====== STORAGE HELPERS ======
 function userKey(k) { return currentUser + '_' + k; }
 function loadJSON(k) { try { return JSON.parse(localStorage.getItem(userKey(k))) || {}; } catch(e) { return {}; } }
-function saveJSON(k, v, silent) { localStorage.setItem(userKey(k), JSON.stringify(v)); if (!silent && SyncManager) SyncManager.push(); }
+function saveJSON(k, v, silent) { localStorage.setItem(userKey(k), JSON.stringify(v)); if (!silent && SyncManager) { SyncManager.push(); SyncManager.scheduleSync(); } }
 function getWrongBook() { return loadJSON('wrongBook'); }
 function getUnsureBook() { return loadJSON('unsureBook'); }
 function getBookmarks() { return loadJSON('bookmarks'); }
@@ -587,6 +587,14 @@ var SyncManager = {
     }, 2000);
   },
 
+  scheduleSync: function() {
+    var self = this;
+    clearTimeout(self._autoSyncTimer);
+    self._autoSyncTimer = setTimeout(function() {
+      if (self.enabled && self.token && self.gistId) self.push();
+    }, 5000);
+  },
+
   pull: function() {
     if (!this.token || !this.gistId) return Promise.resolve();
     var self = this;
@@ -674,6 +682,13 @@ function doLogin() {
 
 // Auto-login on page load
 SyncManager.autoLogin();
+
+// Periodic auto-sync every 60 seconds
+setInterval(function() {
+  if (SyncManager.enabled && SyncManager.token && SyncManager.gistId && !SyncManager.syncing) {
+    SyncManager.push();
+  }
+}, 60000);
 
 
 // ====== BADGE ======
